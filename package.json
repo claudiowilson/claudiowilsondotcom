@@ -1,0 +1,12 @@
+{
+	"name" : "claudiowilsondotcom",
+	"decription" : "Node backend for my personal site",
+	"version" : "0.0.1",
+	"private" : true,
+	"dependencies" : {
+		"express" : ">= 1.6.3",
+		"jade" : ">= 0.x",
+		"stylus" : "0.38.x",
+		"async" : "0.2.x"
+	}
+}
