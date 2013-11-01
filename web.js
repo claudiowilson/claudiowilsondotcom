@@ -14,7 +14,7 @@ app.configure(function() {
 });
 
 app.get('/', function(request, response) {
-	response.send('Welcome to my personal website!');
+	response.render('layout.jade');
 });
 
 var port = process.env.PORT || 3000;
