@@ -5,24 +5,28 @@ block content
 		br 
 		| I'm a Computer Science student at the University of Texas.
 	script.
-		var elem = document.getElementById('background');
-		var params = { width: 285, height: 200 };
-		var two = new Two(params).appendTo(elem);
+		var back = d3.select("#background");
 
-		// two has convenience methods to create shapes.
-		var circle = two.makeCircle(72, 100, 50);
-		var rect = two.makeRectangle(213, 100, 100, 100);
+		var albums = [{
+			"image" : "http://a3.mzstatic.com/us/r30/Music/4c/31/15/mzi.xgwabhdx.100x100-75.jpg",
+			"band" : "Radiohead",
+			"album" : "In Rainbows"
+		}];
 
-		// The object returned has many stylable properties:
-		circle.fill = '#FF8000';
-		circle.stroke = 'orangered'; // Accepts all valid css color
-		circle.linewidth = 5;
+		var node = back.selectAll(".node")
+			.data(albums)
+			.enter().append("g")
+			.attr("class","node")
+			.attr("stroke", "black")
+			.attr("stroke-width", 2);
 
-		rect.fill = 'rgb(0, 200, 255)';
-		rect.opacity = 0.75;
-		rect.noStroke();
+		node.append("image")
+			.attr("x", 10)
+			.attr("y", 10)
+			.attr("width",100)
+			.attr("height", 100)
+			.attr("xlink:href", function(d) {
+				return d.image;
+			});
 
-		// Don't forget to tell two to render everything
-		// to the screen
-		two.update();
 	
