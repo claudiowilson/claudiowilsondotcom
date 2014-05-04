@@ -14,7 +14,7 @@ app.configure(function() {
 });
 
 app.get('/', function(request, response) {
-	response.render('layout.jade');
+	response.render('index.jade');
 });
 
 var port = process.env.PORT || 3000;

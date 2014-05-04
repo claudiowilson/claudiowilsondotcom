@@ -1,23 +1,46 @@
-@import url('http://fonts.googleapis.com/css?family=Droid+Sans')
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,300,700')
+@import url('http://fonts.googleapis.com/css?family=Montserrat')
+@import url('http://fonts.googleapis.com/css?family=Signika:400,700')
 
 body
-	font-family 'Droid Sans', sans-serif;
+	font-family 'Open Sans', sans-serif
+	font-weight 300
 
-.fullscreenDiv
-	background-color #e8e8e8
-	width 100%
-	height auto
-	bottom 0px
-	top 0px
-	left 0
-	position absolute
+.content
+	margin-top 10em
+	float left
 
-.center 
+.sidebar
+	font-family 'Signika', sans-serif
+	margin-left 12em
+	margin-top 5em
+	float left
+	width 15%
+
+
+.sidebar ul
+	padding 0
+
+.sidebar li
+	font-size 1.25em
+	list-style-type none
+	margin-top 10px
+
+.sidebar li a, .sidebar li a:link
+	text-decoration none
+	color #000
+
+.sidebar a:hover
+	font-weight 700
+
+.sidebar a:visited
+	color #000
+
+#header
+	font-family 'Montserrat', sans-serif
+	font-weight 700
+	font-size 1.75em
+
+#background
 	position absolute
-	width 250px
-	height 50px
-	top 50%
-	left 50%
-	margin-top -70px
-	margin-left -100px
-	font-size 36px
+	z-index -1
