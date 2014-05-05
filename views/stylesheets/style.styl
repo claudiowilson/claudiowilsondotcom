@@ -10,7 +10,7 @@ body
 	margin-top 10em
 	float left
 
-.sidebar
+#sidebar
 	font-family 'Signika', sans-serif
 	margin-left 12em
 	margin-top 5em
@@ -18,22 +18,22 @@ body
 	width 15%
 
 
-.sidebar ul
+#sidebar ul
 	padding 0
 
-.sidebar li
+#sidebar li
 	font-size 1.25em
 	list-style-type none
 	margin-top 10px
 
-.sidebar li a, .sidebar li a:link
+#sidebar li a, .sidebar li a:link
 	text-decoration none
 	color #000
 
-.sidebar a:hover
+#sidebar a:hover
 	font-weight 700
 
-.sidebar a:visited
+#sidebar a:visited
 	color #000
 
 #header
@@ -43,4 +43,11 @@ body
 
 #background
 	position absolute
-	z-index -1
+	z-index -2
+
+.container 
+	background-color white
+
+.blur-on
+	filter url(#blur)
+

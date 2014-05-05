@@ -7,6 +7,7 @@
 		"express" : ">= 1.6.3",
 		"jade" : ">= 0.x",
 		"stylus" : "0.38.x",
-		"async" : "0.2.x"
+		"async" : "0.2.x",
+		"firebase" : "1.0.14"
 	}
 }

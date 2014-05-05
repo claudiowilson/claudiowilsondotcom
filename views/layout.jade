@@ -1,29 +1,29 @@
-!!! 5
+doctype html
 html(lang='en')
 	head
 		title claudio
 		script(src="http://code.jquery.com/jquery-1.9.1.js")
+		script(src="https://cdn.firebase.com/js/client/1.0.11/firebase.js")
 		script(src="/bower_components/d3/d3.min.js")
-		//script(src="/two.min.js")
 		link(rel='stylesheet' href='/stylesheets/style.css')
 	body
 		svg#background
-		.sidebar
-			#header 
-				| CLAUDIO 
-				br 
-				| WILSON
-			ul
-				li
-					a(href="/") Index
-				li
-					a(href="/blog/index") Blog
-				li
-					a(href="/projects") Projects
-				li
-					a(href="/contact") Contact
-				li 
-					a(href="http://www.github.com/claudiowilson") Github
-				li 
-					a(href="http://www.twitter.com/claudiyoh") Twitter
+		#sidebar
+				#header 
+					| CLAUDIO 
+					br 
+					| WILSON
+				ul
+					li
+						a(href="/") Index
+					li
+						a(href="/blog/index") Blog
+					li
+						a(href="/projects") Projects
+					li
+						a(href="/contact") Contact
+					li 
+						a(href="http://www.github.com/claudiowilson") Github
+					li 
+						a(href="http://www.twitter.com/claudiyoh") Twitter
 	block content
