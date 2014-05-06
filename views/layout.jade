@@ -1,28 +1,67 @@
-!!! 5
+doctype html
 html(lang='en')
 	head
 		title claudio
 		script(src="http://code.jquery.com/jquery-1.9.1.js")
-		script(src="/two.min.js")
+		script(src="https://cdn.firebase.com/js/client/1.0.11/firebase.js")
+		script(src="/bower_components/d3/d3.min.js")
 		link(rel='stylesheet' href='/stylesheets/style.css')
 	body
 		svg#background
-		.sidebar
-			#header 
-				| CLAUDIO 
-				br 
-				| WILSON
-			ul
-				li
-					a(href="/") Index
-				li
-					a(href="/blog/index") Blog
-				li
-					a(href="/projects") Projects
-				li
-					a(href="/contact") Contact
-				li 
-					a(href="http://www.github.com/claudiowilson") Github
-				li 
-					a(href="http://www.twitter.com/claudiyoh") Twitter
+		#sidebar
+				#header
+					h4
+						a(href="/")
+							| CLAUDIO 
+							br 
+							| WILSON
+				ul
+					li
+						a(href="/index") Index
+					li
+						a(href="/blog/index") Blog
+					li
+						a(href="/projects") Projects
+					li
+						a(href="/contact") Contact
+					li 
+						a(href="http://www.github.com/claudiowilson") Github
+					li 
+						a(href="http://www.twitter.com/claudiyoh") Twitter
+		script.
+			var back = d3.select("#background");
+			var svgHeight = $("#background").height();
+			var svgWidth = $("#background").width();
+
+			var maxVerticalAlbums = Math.floor(svgHeight/100);
+			var maxHorizontalAlbums = Math.floor(svgWidth/100);
+			var totalMaxAlbums = maxVerticalAlbums * maxHorizontalAlbums;
+
+			back.append("defs")
+				.append("filter")
+				.attr("id", "blur")
+				.append("feGaussianBlur")
+				.attr("stdDeviation", 1.5);
+
+			var albums = !{albums}
+
+			var node = back.selectAll(".node")
+				.data(albums)
+				.enter().append("g")
+				.attr("class","node");
+
+			node.append("image")
+				.attr("x", function(d, i) {
+					var coeff = Math.floor(i / maxVerticalAlbums);
+					return (i % maxHorizontalAlbums) * 100 + 100 * coeff;
+				})
+				.attr("y", function(d, i) {
+					var coeff = Math.floor(i / maxHorizontalAlbums);
+					return (i % maxVerticalAlbums) * 100 + 100 * coeff;
+				})
+				.attr("width",100)
+				.attr("height", 100)
+				.attr("xlink:href", function(d, i) {
+					return d.image;
+				});
 	block content
