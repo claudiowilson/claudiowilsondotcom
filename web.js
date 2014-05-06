@@ -10,9 +10,9 @@ app.use(stylus.middleware({
 }));
 
 app.use(express.cookieParser());
-app.use(express.session({secret: 'yoloswagclaudio'}));
+app.use(express.session({secret: ''}));
 
-var tokenGenerator = new FirebaseTokenGenerator('GyzhDVAARVJ01NtpPDcqUbBJzK0WUyVDXuGauqQr');
+var tokenGenerator = new FirebaseTokenGenerator('');
 var token = tokenGenerator.createToken();
 
 var albumRef = new Firebase('https://glowing-fire-8113.firebaseio.com/albums');
