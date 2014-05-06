@@ -8,6 +8,10 @@ app.use(stylus.middleware({
 	src: __dirname + '/views',
 	dest: __dirname + '/public'
 }));
+
+app.use(express.cookieParser());
+app.use(express.session({secret: 'yoloswagclaudio'}));
+
 var tokenGenerator = new FirebaseTokenGenerator('GyzhDVAARVJ01NtpPDcqUbBJzK0WUyVDXuGauqQr');
 var token = tokenGenerator.createToken();
 
@@ -36,6 +40,19 @@ app.get('/', function(request, response) {
 
 app.get('/index', function(request, response) {
 	response.render('index.jade', {albums: JSON.stringify(albumCache)});
+});
+
+app.get('/newalbum', function(request,response) {
+	var date = new Date();
+	date.setSeconds(date.getSeconds() - 3);
+	if(!request.session.lastWritten || request.session.lastWritten < date.getTime()) {
+		request.session.lastWritten = new Date().getTime();
+		console.log(request.session.lastWritten);
+		response.render('layout.jade', {albums: JSON.stringify(albumCache)});
+	} else {
+		console.log('yolo');
+		response.render('layout.jade', {albums: JSON.stringify(albumCache)});
+	}
 });
 
 var port = process.env.PORT || 3000;
