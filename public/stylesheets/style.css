@@ -24,8 +24,8 @@ body {
   list-style-type: none;
   margin-top: 10px;
 }
-#sidebar li a,
-.sidebar li a:link {
+a,
+a:link {
   text-decoration: none;
   color: #000;
 }

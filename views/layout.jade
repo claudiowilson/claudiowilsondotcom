@@ -9,13 +9,15 @@ html(lang='en')
 	body
 		svg#background
 		#sidebar
-				#header 
-					| CLAUDIO 
-					br 
-					| WILSON
+				#header
+					h4
+						a(href="/")
+							| CLAUDIO 
+							br 
+							| WILSON
 				ul
 					li
-						a(href="/") Index
+						a(href="/index") Index
 					li
 						a(href="/blog/index") Blog
 					li
@@ -26,4 +28,40 @@ html(lang='en')
 						a(href="http://www.github.com/claudiowilson") Github
 					li 
 						a(href="http://www.twitter.com/claudiyoh") Twitter
+		script.
+			var back = d3.select("#background");
+			var svgHeight = $("#background").height();
+			var svgWidth = $("#background").width();
+
+			var maxVerticalAlbums = Math.floor(svgHeight/100);
+			var maxHorizontalAlbums = Math.floor(svgWidth/100);
+			var totalMaxAlbums = maxVerticalAlbums * maxHorizontalAlbums;
+
+			back.append("defs")
+				.append("filter")
+				.attr("id", "blur")
+				.append("feGaussianBlur")
+				.attr("stdDeviation", 1.5);
+
+			var albums = !{albums}
+
+			var node = back.selectAll(".node")
+				.data(albums)
+				.enter().append("g")
+				.attr("class","node");
+
+			node.append("image")
+				.attr("x", function(d, i) {
+					var coeff = Math.floor(i / maxVerticalAlbums);
+					return (i % maxHorizontalAlbums) * 100 + 100 * coeff;
+				})
+				.attr("y", function(d, i) {
+					var coeff = Math.floor(i / maxHorizontalAlbums);
+					return (i % maxVerticalAlbums) * 100 + 100 * coeff;
+				})
+				.attr("width",100)
+				.attr("height", 100)
+				.attr("xlink:href", function(d, i) {
+					return d.image;
+				});
 	block content
