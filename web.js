@@ -1,6 +1,7 @@
 var express = require('express'),
 	stylus = require('stylus'),
 	Firebase = require('firebase'),
+	searcher = require('./musicSearch'),
 	FirebaseTokenGenerator = require('firebase-token-generator');
 
 var app = express();
@@ -42,12 +43,22 @@ app.get('/index', function(request, response) {
 	response.render('index.jade', {albums: JSON.stringify(albumCache)});
 });
 
-app.get('/newalbum', function(request,response) {
+app.get('/search/:name', function(request, response) {
+	if(!request.params.name || request.params.name.length < 3) {
+		return {};
+	}
+
+	searcher.getAlbums(request.params.name, function(err, json) {
+		response.json(json);
+	});
+});
+
+
+app.post('/newalbum', function(request,response) {
 	var date = new Date();
-	date.setSeconds(date.getSeconds() - 3);
+	date.setSeconds(date.getSeconds() - 1);
 	if(!request.session.lastWritten || request.session.lastWritten < date.getTime()) {
 		request.session.lastWritten = new Date().getTime();
-		console.log(request.session.lastWritten);
 		response.render('layout.jade', {albums: JSON.stringify(albumCache)});
 	} else {
 		console.log('yolo');

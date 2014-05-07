@@ -1,10 +1,43 @@
 extend layout
 block content
 	.content
-		| Hi, my name is Claudio Wilson.
-		br 
-		| I'm a Computer Science student at the University of Texas.
+		p Hi, my name is Claudio Wilson. 
+		p I'm a Computer Science student at the University of Texas.
+		form(method="post" action="/newalbum")
+			input(id="albums")
+			input(type="hidden" id="album" name="album")
+			input(type="hidden" id="artist" name="artist")
+			input(type="hidden" id="image" name="image")
 	script.
+		$( "#albums" ).autocomplete({
+			minLength : 2,
+			source: function(request, response) {
+				$.ajax({
+					url : "/search/" + request.term,
+					dataType : "json",
+					success : function(data) {
+						response(data.map(function(x) {
+							return {
+								label : x["album"],
+								value : x["album"],
+								artist : x["artist"],
+								icon : x["image"]
+							}
+						}));
+					}
+				});
+			},
+			select : function(event, ui) {
+				$('#album').val(ui.item.value);
+				$('#artist').val(ui.item.artist);
+				$('#image').val(ui.item.icon);
+				console.log(ui.item);
+			}
+		}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+			return $( "<li>" )
+				.append( '<a><img src="' + item.icon + '" height="50" width="50"><span>' + item.label + '</span><br><span style="font-size:small">' + item.artist + "</span></a>" )
+				.appendTo( ul );
+			};
 
 		back.selectAll("image")
 			.attr("class", "blur-on");

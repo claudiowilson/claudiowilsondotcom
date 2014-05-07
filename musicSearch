@@ -1,0 +1,24 @@
+var https = require('https');
+
+var getAlbums = function(term, callback) {
+	var url = "https://itunes.apple.com/search?term=";
+	url += term;
+	url += '&entity=album&limit=5';
+
+	https.get(url, function(response) {
+		var str = '';
+		response.on('data', function (chunk) {
+			str += chunk;
+		});
+
+		response.on('end', function () {
+			var result = JSON.parse(str);
+			var obj = result['results'].map(function(album) {
+				return { "album" : album["collectionName"], "artist" : album["artistName"], "image" : album["artworkUrl100"]}
+			});
+			callback(null, obj);
+		});
+	});
+};
+
+exports.getAlbums = getAlbums;
