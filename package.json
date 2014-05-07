@@ -4,10 +4,12 @@
 	"version" : "0.0.1",
 	"private" : true,
 	"dependencies" : {
-		"express" : ">= 1.6.3",
+		"express" : "4.1.1",
 		"jade" : ">= 0.x",
 		"stylus" : "0.38.x",
 		"firebase" : "1.0.14",
-		"firebase-token-generator" : "0.1.4"
+		"firebase-token-generator" : "0.1.4",
+		"cookie-parser" : "1.0.3",
+		"express-session" : "1.0.4"
 	}
 }

@@ -2,7 +2,9 @@ var express = require('express'),
 	stylus = require('stylus'),
 	Firebase = require('firebase'),
 	searcher = require('./musicSearch'),
-	FirebaseTokenGenerator = require('firebase-token-generator');
+	FirebaseTokenGenerator = require('firebase-token-generator'),
+	cookieParser = require('cookie-parser'),
+	session = require('express-session');
 
 var app = express();
 app.use(stylus.middleware({
@@ -10,8 +12,8 @@ app.use(stylus.middleware({
 	dest: __dirname + '/public'
 }));
 
-app.use(express.cookieParser());
-app.use(express.session({secret: ''}));
+app.use(cookieParser());
+app.use(session({secret: ''}));
 
 var tokenGenerator = new FirebaseTokenGenerator('');
 var token = tokenGenerator.createToken();
