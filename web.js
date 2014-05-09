@@ -1,9 +1,9 @@
 var express = require('express'),
 	stylus = require('stylus'),
-	Firebase = require('firebase'),
 	searcher = require('./musicSearch'),
-	FirebaseTokenGenerator = require('firebase-token-generator'),
+	albumDb = require('./albumDb'),
 	cookieParser = require('cookie-parser'),
+	bodyParser = require('body-parser'),
 	session = require('express-session');
 
 var app = express();
@@ -13,36 +13,18 @@ app.use(stylus.middleware({
 }));
 
 app.use(cookieParser());
-app.use(session({secret: ''}));
-
-var tokenGenerator = new FirebaseTokenGenerator('');
-var token = tokenGenerator.createToken();
-
-var albumRef = new Firebase('https://glowing-fire-8113.firebaseio.com/albums');
-var albumCache = [];
-
-albumRef.auth(token, function(err) {
-	if(err) {
-		console.log("Authentication failed!");
-	} else {
-		console.log("Login succeeded!");
-	}
-});
-
-albumRef.on('child_added', function(snapshot) {
-	console.log(JSON.stringify(snapshot.val()) + " added!");
-	albumCache.push(snapshot.val());
-});
+app.use(session({secret: 'yolo'}));
+app.use(bodyParser.urlencoded());
 
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(request, response) {
-	response.render('layout.jade', {albums: JSON.stringify(albumCache)});
+	response.render('layout.jade');
 });
 
 app.get('/index', function(request, response) {
-	response.render('index.jade', {albums: JSON.stringify(albumCache)});
+	response.render('index.jade');
 });
 
 app.get('/search/:name', function(request, response) {
@@ -59,12 +41,21 @@ app.get('/search/:name', function(request, response) {
 app.post('/newalbum', function(request,response) {
 	var date = new Date();
 	date.setSeconds(date.getSeconds() - 1);
-	if(!request.session.lastWritten || request.session.lastWritten < date.getTime()) {
+	if(request.session.lastWritten && request.session.lastWritten < date.getTime()) {
 		request.session.lastWritten = new Date().getTime();
-		response.render('layout.jade', {albums: JSON.stringify(albumCache)});
+		response.send(500);
 	} else {
-		console.log('yolo');
-		response.render('layout.jade', {albums: JSON.stringify(albumCache)});
+		if(searcher.hasUserSelection(request.body.index)) {
+			albumDb.addAlbum(searcher.getUserSelection(request.body.index), function(err) {
+				if(err) {
+					response.send(500);
+				} else {
+					response.send(200);
+				}
+			});
+		} else {
+			response.send(500);
+		}
 	}
 });
 

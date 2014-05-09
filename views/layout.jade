@@ -17,19 +17,20 @@ html(lang='en')
 							| CLAUDIO 
 							br 
 							| WILSON
-				ul
-					li
-						a(href="/index") Index
-					li
-						a(href="/blog/index") Blog
-					li
-						a(href="/projects") Projects
-					li
-						a(href="/contact") Contact
-					li 
-						a(href="http://www.github.com/claudiowilson") Github
-					li 
-						a(href="http://www.twitter.com/claudiyoh") Twitter
+				.container
+					ul
+						li
+							a(href="/index") Index
+						li
+							a(href="/blog/index") Blog
+						li
+							a(href="/projects") Projects
+						li
+							a(href="/contact") Contact
+						li 
+							a(href="http://www.github.com/claudiowilson") Github
+						li 
+							a(href="http://www.twitter.com/claudiyoh") Twitter
 		script.
 			var back = d3.select("#background");
 			var svgHeight = $("#background").height();
@@ -45,25 +46,39 @@ html(lang='en')
 				.append("feGaussianBlur")
 				.attr("stdDeviation", 1.5);
 
-			var albums = !{albums}
+			var albums = [];
 
-			var node = back.selectAll(".node")
-				.data(albums)
-				.enter().append("g")
-				.attr("class","node");
+			var fb = new Firebase('https://glowing-fire-8113.firebaseIO.com/albums');
+			fb.on('child_added', function(snapshot) {
+				albums.push(snapshot.val());
+				rebind();
+			});
 
-			node.append("image")
-				.attr("x", function(d, i) {
-					var coeff = Math.floor(i / maxVerticalAlbums);
-					return (i % maxHorizontalAlbums) * 100 + 100 * coeff;
-				})
-				.attr("y", function(d, i) {
-					var coeff = Math.floor(i / maxHorizontalAlbums);
-					return (i % maxVerticalAlbums) * 100 + 100 * coeff;
-				})
-				.attr("width",100)
-				.attr("height", 100)
-				.attr("xlink:href", function(d, i) {
-					return d.image;
-				});
+			var rebind = function() {
+				var group = back.selectAll(".node")
+				.data(albums);
+
+				group.enter().append("g")
+					.attr("class","node")
+					.append("image")
+					.attr("x", function(d, i) {
+						var coeff = Math.floor(i / maxVerticalAlbums);
+						return (i % maxHorizontalAlbums) * 100 + 100 * coeff;
+					})
+					.attr("y", function(d, i) {
+						var coeff = Math.floor(i / maxHorizontalAlbums);
+						return (i % maxVerticalAlbums) * 100 + 100 * coeff;
+					})
+					.attr("width",100)
+					.attr("height", 100)
+					.attr("xlink:href", function(d, i) {
+						return d.image;
+					});
+
+				back.select("image")
+					.style("opacity", 0)
+					.transition().duration(1000)
+					.style("opacity", 100);
+			};
+			
 	block content

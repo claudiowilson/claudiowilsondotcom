@@ -1,13 +1,20 @@
 extend layout
 block content
 	.content
-		p Hi, my name is Claudio Wilson. 
-		p I'm a Computer Science student at the University of Texas.
-		form(method="post" action="/newalbum")
-			input(id="albums")
-			input(type="hidden" id="album" name="album")
-			input(type="hidden" id="artist" name="artist")
-			input(type="hidden" id="image" name="image")
+		.container
+			p Hi, my name is Claudio Wilson. 
+			p I'm a Computer Science student at the University of Texas.
+			|	Visiting? I'd love for you to add some album art to my background!
+			form(method="post" action="/newalbum")
+				input(id="albums" placeholder="Go ahead, type in an album name!")
+				input(type="hidden" id="index" name="index")
+				#albumSelection
+					img(src="http://a5.mzstatic.com/us/r30/Music/79/d3/09/mzi.nlpldxzh.100x100-75.jpg" id="album" height=100 width=100)
+					#albumText
+						p#albumName The Suburbs
+						p#artistName Arcade Fire
+				input(type="submit" value="Add This Album!")
+
 	script.
 		$( "#albums" ).autocomplete({
 			minLength : 2,
@@ -21,16 +28,16 @@ block content
 								label : x["album"],
 								value : x["album"],
 								artist : x["artist"],
-								icon : x["image"]
+								icon : x["image"],
+								index : x["index"]
 							}
 						}));
 					}
 				});
 			},
 			select : function(event, ui) {
-				$('#album').val(ui.item.value);
-				$('#artist').val(ui.item.artist);
-				$('#image').val(ui.item.icon);
+				$('#index').val(ui.item.index);
+				$('#album').attr("src", ui.item.icon);
 				console.log(ui.item);
 			}
 		}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
@@ -39,10 +46,5 @@ block content
 				.appendTo( ul );
 			};
 
-		back.selectAll("image")
-			.attr("class", "blur-on");
-
-	//- 	back.selectAll("image").transition().duration(5000)
-	//- 		.attr("x", 320)
-	//- 		.attr("y", 50);
-	//- 
+		//d3.select("#background")
+		//	.attr("class", "blur-on");
