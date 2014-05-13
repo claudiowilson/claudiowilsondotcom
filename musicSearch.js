@@ -1,7 +1,7 @@
 var https = require('https'),
 	lru = require('lru-cache'),
 	banned = {"Miley Cyrus" : true, "Justin Bieber" : true,
-				"One Direction" : true, "Katy Perry" : true, "Hannah Montana" : true},
+				"One Direction" : true, "Katy Perry" : true, "Hannah Montana" : true, "Selena Gomez" : true},
 	maxItems = 500,
 	options = { max: maxItems,
               	maxAge: 1000 * 60 * 60 },

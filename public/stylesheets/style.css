@@ -6,7 +6,7 @@ body {
   font-weight: 300;
 }
 .content {
-  margin-top: 14em;
+  margin-top: 12em;
   margin-left: 5em;
   float: left;
 }
@@ -38,6 +38,10 @@ a:link {
 #sidebar a:visited {
   color: #000;
 }
+#sidebar .container {
+  border-style: solid;
+  border-width: 2px;
+}
 #header {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
@@ -56,11 +60,12 @@ a:link {
   border-style: solid;
   border-width: 2px;
 }
+#albumAdd {
+  margin-top: 10px;
+}
 .container {
   background-color: #fff;
   padding: 10px;
-  border-style: solid;
-  border-width: 2px;
 }
 #albumSelection {
   overflow: hidden;

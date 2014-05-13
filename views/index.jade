@@ -5,9 +5,9 @@ block content
 			p Hi, my name is Claudio Wilson. 
 			p I'm a Computer Science student at the University of Texas.
 			|	Visiting? I'd love for you to add some album art to my background!
-			form(method="post" action="/newalbum")
+			form(method="post" action="/newalbum" id="albumAdd")
 				input(id="albums" placeholder="Go ahead, type in an album name!")
-				input(type="hidden" id="index" name="index")
+				input(type="hidden" id="index" name="index" onclick="submitAlbum")
 				#albumSelection
 					img(src="http://a5.mzstatic.com/us/r30/Music/79/d3/09/mzi.nlpldxzh.100x100-75.jpg" id="album" height=100 width=100)
 					#albumText
@@ -16,6 +16,17 @@ block content
 				input(type="submit" value="Add This Album!")
 
 	script.
+		$(function() {
+			$('#albumAdd').submit(function(e) {
+				$.ajax({
+					type : "POST",
+					url : "/newalbum",
+					data : $('#albumAdd').serialize()
+				});
+				e.preventDefault();
+			});
+		});
+
 		$( "#albums" ).autocomplete({
 			minLength : 2,
 			source: function(request, response) {
@@ -37,6 +48,8 @@ block content
 			},
 			select : function(event, ui) {
 				$('#index').val(ui.item.index);
+				$('#albumName').text(ui.item.value);
+				$('#artistName').text(ui.item.artist)
 				$('#album').attr("src", ui.item.icon);
 				console.log(ui.item);
 			}
@@ -47,4 +60,4 @@ block content
 			};
 
 		//d3.select("#background")
-		//	.attr("class", "blur-on");
+			//.attr("class", "blur-on");
