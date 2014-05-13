@@ -13,10 +13,11 @@ html(lang='en')
 		#sidebar
 				#header
 					h4
-						a(href="/")
-							| CLAUDIO 
-							br 
-							| WILSON
+						.container
+							a(href="/")
+								| CLAUDIO 
+								br 
+								| WILSON
 				.container
 					ul
 						li
@@ -62,12 +63,11 @@ html(lang='en')
 					.attr("class","node")
 					.append("image")
 					.attr("x", function(d, i) {
-						var coeff = Math.floor(i / maxVerticalAlbums);
-						return (i % maxHorizontalAlbums) * 100 + 100 * coeff;
+						return (i % maxHorizontalAlbums) * 100;
 					})
 					.attr("y", function(d, i) {
 						var coeff = Math.floor(i / maxHorizontalAlbums);
-						return (i % maxVerticalAlbums) * 100 + 100 * coeff;
+						return 100 * coeff;
 					})
 					.attr("width",100)
 					.attr("height", 100)

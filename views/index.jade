@@ -4,16 +4,17 @@ block content
 		.container
 			p Hi, my name is Claudio Wilson. 
 			p I'm a Computer Science student at the University of Texas.
-			|	Visiting? I'd love for you to add some album art to my background!
-			form(method="post" action="/newalbum" id="albumAdd")
-				input(id="albums" placeholder="Go ahead, type in an album name!")
-				input(type="hidden" id="index" name="index" onclick="submitAlbum")
-				#albumSelection
-					img(src="http://a5.mzstatic.com/us/r30/Music/79/d3/09/mzi.nlpldxzh.100x100-75.jpg" id="album" height=100 width=100)
-					#albumText
-						p#albumName The Suburbs
-						p#artistName Arcade Fire
-				input(type="submit" value="Add This Album!")
+			|	Visiting? Leave a mark by adding some album art to my background!
+			p
+				form(method="post" action="/newalbum" id="albumAdd")
+					input(id="albums" placeholder="Type in an album name!")
+					input(type="hidden" id="index" name="index" onclick="submitAlbum")
+					#albumSelection
+						img(src="" id="album" height=100 width=100)
+						#albumText
+							p#albumName
+							p#artistName
+						input(type="submit" value="Add This Album!")
 
 	script.
 		$(function() {
@@ -51,7 +52,7 @@ block content
 				$('#albumName').text(ui.item.value);
 				$('#artistName').text(ui.item.artist)
 				$('#album').attr("src", ui.item.icon);
-				console.log(ui.item);
+				$('#albumSelection').show();
 			}
 		}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
 			return $( "<li>" )

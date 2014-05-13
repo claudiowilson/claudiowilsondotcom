@@ -7,7 +7,7 @@ body {
 }
 .content {
   margin-top: 12em;
-  margin-left: 5em;
+  margin-left: 30em;
   float: left;
 }
 .content .container {
@@ -17,6 +17,7 @@ body {
   font-family: 'Signika', sans-serif;
   margin-left: 12em;
   margin-top: 5em;
+  position: fixed;
   float: left;
 }
 #sidebar ul {
@@ -46,10 +47,9 @@ a:link {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   font-size: 1.75em;
-  margin-left: 10px;
 }
 #background {
-  position: absolute;
+  position: fixed;
   z-index: -2;
 }
 #artistName {
@@ -69,6 +69,15 @@ a:link {
 }
 #albumSelection {
   overflow: hidden;
+  margin-top: 20px;
+  display: none;
+}
+#albums {
+  border-radius: 2.5px;
+  -moz-border-radius: 2.5px;
+  -webkit-border-radius: 2.5px;
+  width: 150px;
+  height: 20px;
 }
 .ui-autocomplete {
   font-family: 'Open Sans', sans-serif;

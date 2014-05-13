@@ -29,7 +29,7 @@ var getAlbums = function(term, callback) {
 				if(banned[item["artist"]]) {
 					item = {"album" : "NO",
 							"artist" : "Just, no.",
-							"image" : "http://a2.mzstatic.com/us/r30/Music/v4/44/0b/ce/440bce9e-ac2a-08fb-2665-af01d2460644/859709724072_cover.100x100-75.jpg"};
+							"image" : "https://pbs.twimg.com/profile_images/378800000822867536/3f5a00acf72df93528b6bb7cd0a4fd0c.jpeg"};
 				} else {
 					cache.set(index, JSON.parse(JSON.stringify(item)));
 					item["index"] = index;
