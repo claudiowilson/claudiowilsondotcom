@@ -41,11 +41,11 @@ app.get('/search/:name', function(request, response) {
 
 app.post('/newalbum', function(request,response) {
 	var result = geoip.lookup(request.connection.remoteAddress);
-	var lookup = result ? result : {"country" : "The Land of Claudio"};
+	var lookup = result ? result : {"country" : "Unknown"};
 	if (request.connection.remoteAddress == "127.0.0.1") {
 		lookup = { "country" : "Claudio's Computer" };
 	}
-	
+
 	if(searcher.hasUserSelection(request.body.index)) {
 		albumDb.addAlbum(searcher.getUserSelection(request.body.index), lookup, function(err) {
 			if(err) {
