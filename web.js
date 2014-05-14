@@ -4,7 +4,8 @@ var express = require('express'),
 	albumDb = require('./albumDb'),
 	cookieParser = require('cookie-parser'),
 	bodyParser = require('body-parser'),
-	session = require('express-session');
+	session = require('express-session'),
+	geoip = require('geoip-lite');
 
 var app = express();
 app.use(stylus.middleware({
@@ -39,23 +40,22 @@ app.get('/search/:name', function(request, response) {
 
 
 app.post('/newalbum', function(request,response) {
-	var date = new Date();
-	date.setSeconds(date.getSeconds() - 1);
-	if(request.session.lastWritten && request.session.lastWritten < date.getTime()) {
-		request.session.lastWritten = new Date().getTime();
-		response.send(500);
+	var result = geoip.lookup(request.connection.remoteAddress);
+	var lookup = result ? result : {"country" : "The Land of Claudio"};
+	if (request.connection.remoteAddress == "127.0.0.1") {
+		lookup = { "country" : "Claudio's Computer" };
+	}
+	
+	if(searcher.hasUserSelection(request.body.index)) {
+		albumDb.addAlbum(searcher.getUserSelection(request.body.index), lookup, function(err) {
+			if(err) {
+				response.send(500);
+			} else {
+				response.send(200);
+			}
+		});
 	} else {
-		if(searcher.hasUserSelection(request.body.index)) {
-			albumDb.addAlbum(searcher.getUserSelection(request.body.index), function(err) {
-				if(err) {
-					response.send(500);
-				} else {
-					response.send(200);
-				}
-			});
-		} else {
-			response.send(500);
-		}
+		response.send(500);
 	}
 });
 
