@@ -7,12 +7,24 @@ body
 	font-weight 300
 
 .content
-	margin-top 12em
+	margin-top 16em
 	margin-left 30em
 	float left
 
+.container
+	border-style solid
+	border-width 2px
+
 .content .container
 	overflow hidden
+	opacity 0.5
+
+.container:hover
+	opacity 1
+
+.node:hover
+	cursor pointer
+	opacity 0.5
 
 #sidebar
 	font-family 'Signika', sans-serif
@@ -38,10 +50,6 @@ a, a:link
 
 #sidebar a:visited
 	color #000
-
-#sidebar .container
-	border-style solid
-	border-width 2px
 
 #header
 	font-family 'Montserrat', sans-serif

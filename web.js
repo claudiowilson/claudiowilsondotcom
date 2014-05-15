@@ -21,11 +21,11 @@ app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(request, response) {
-	response.render('layout.jade');
+	response.render('layout.jade', {count : albumDb.count()});
 });
 
 app.get('/index', function(request, response) {
-	response.render('index.jade');
+	response.render('index.jade', {count : albumDb.count()});
 });
 
 app.get('/search/:name', function(request, response) {

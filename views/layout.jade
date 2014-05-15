@@ -36,7 +36,8 @@ html(lang='en')
 			var back = d3.select("#background");
 			var svgHeight = $("#background").height();
 			var svgWidth = $("#background").width();
-
+			var duration = 5000;
+			var currentNumAlbums = !{count};
 			var maxVerticalAlbums = Math.floor(svgHeight/100);
 			var maxHorizontalAlbums = Math.floor(svgWidth/100);
 			var totalMaxAlbums = maxVerticalAlbums * maxHorizontalAlbums;
@@ -53,6 +54,9 @@ html(lang='en')
 			fb.on('child_added', function(snapshot) {
 				albums.push(snapshot.val());
 				rebind();
+				if(albums.length < currentNumAlbums) {
+					currentNumAlbums++;
+				}
 			});
 
 			var rebind = function() {
@@ -62,6 +66,9 @@ html(lang='en')
 				group.enter().append("g")
 					.attr("class","node")
 					.append("image")
+					.on('click', function() {
+						console.log('swag');
+					})
 					.attr("x", function(d, i) {
 						return (i % maxHorizontalAlbums) * 100;
 					})
@@ -73,12 +80,17 @@ html(lang='en')
 					.attr("height", 100)
 					.attr("xlink:href", function(d, i) {
 						return d.image;
-					});
-
-				//back.select("image")
-				//	.style("opacity", 0)
-				//	.transition().duration(1000)
-				//	.style("opacity", 100);
+					})
+					.style("opacity", 0)
+					.transition().duration(2000)
+					.delay(function(d, i) {
+						if(currentNumAlbums == 0 || i >= currentNumAlbums) {
+							return 0;
+						}
+						return (i/currentNumAlbums) * duration;
+					})
+					.style("opacity", 100);
+					
 			};
 			
 	block content

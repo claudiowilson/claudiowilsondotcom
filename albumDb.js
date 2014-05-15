@@ -6,6 +6,7 @@ var token = tokenGenerator.createToken({"not" : "null"});
 var duplicates = {};
 
 var albumRef = new firebase('https://glowing-fire-8113.firebaseio.com/albums');
+var count = 0;
 
 albumRef.auth(token, function(err) {
 	if(err) {
@@ -26,7 +27,11 @@ var addAlbum = function(album, ipAddress, callback) {
 
 albumRef.on('child_added', function(snapshot) {
 	duplicates[snapshot.val()["image"]] = true;
+	count++;
 });
 
 
 exports.addAlbum = addAlbum;
+exports.count = function() {
+	return count;
+};
