@@ -14,7 +14,7 @@ block content
 						#albumText
 							p#albumName
 							p#artistName
-						input(type="submit" value="Add This Album!")
+						input(id="submitAlbum" type="submit" value="Submit")
 
 	script.
 		$(function() {
@@ -22,7 +22,13 @@ block content
 				$.ajax({
 					type : "POST",
 					url : "/newalbum",
-					data : $('#albumAdd').serialize()
+					data : $('#albumAdd').serialize(),
+					success : function(data) {
+						alert(data);
+					},
+					error : function(data) {
+						alert(data["responseText"]);
+					}
 				});
 				e.preventDefault();
 			});
