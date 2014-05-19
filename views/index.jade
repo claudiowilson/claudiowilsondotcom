@@ -12,10 +12,10 @@ block content
 					#albumSelection
 						img(src="" id="album" height=100 width=100)
 						#albumText
-							p#albumName
-							p#artistName
+							p(class="albumName")
+							p(class="artistName")
 						input(id="submitAlbum" type="submit" value="Submit")
-
+					
 	script.
 		$(function() {
 			$('#albumAdd').submit(function(e) {
@@ -58,8 +58,8 @@ block content
 			},
 			select : function(event, ui) {
 				$('#index').val(ui.item.index);
-				$('#albumName').text(ui.item.value);
-				$('#artistName').text(ui.item.artist)
+				$('#albumText > .albumName').text(ui.item.value);
+				$('#albumText > .artistName').text(ui.item.artist)
 				$('#album').attr("src", ui.item.icon);
 				$('#albumSelection').show();
 			}

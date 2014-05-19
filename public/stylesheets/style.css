@@ -11,8 +11,7 @@ body {
   float: left;
 }
 .container {
-  border-style: solid;
-  border-width: 2px;
+  border: 2px solid #000;
 }
 .content .container {
   overflow: hidden;
@@ -64,14 +63,12 @@ a:link {
   position: fixed;
   z-index: -2;
 }
-#albumName {
+.albumName {
   margin-top: 10px;
-  margin-left: 5px;
   font-size: large;
 }
-#artistName {
+.artistName {
   margin-top: -10px;
-  margin-left: 5px;
   font-size: small;
 }
 #album {
@@ -98,6 +95,22 @@ a:link {
   -webkit-border-radius: 2.5px;
   width: 100px;
   height: 20px;
+}
+#albumClick {
+  height: 700px;
+  width: 700px;
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  border: 2px solid #000;
+  background: #fff;
+  overflow: scroll;
+  padding-left: 50px;
+  font-size: small;
+  display: none;
+}
+#album600 {
+  margin-top: 50px;
 }
 .ui-autocomplete {
   font-family: 'Open Sans', sans-serif;

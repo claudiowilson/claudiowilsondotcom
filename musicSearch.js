@@ -10,8 +10,7 @@ var https = require('https'),
 var index = 0;
 
 var getAlbums = function(term, callback) {
-	var url = "https://itunes.apple.com/search?term=";
-	url += term;
+	var url = 'https://itunes.apple.com/search?term=' + term;
 	url += '&entity=album&limit=5';
 
 	https.get(url, function(response) {
@@ -24,8 +23,9 @@ var getAlbums = function(term, callback) {
 			var result = JSON.parse(str);
 			var obj = result['results'].map(function(album) {
 				var item = { "album" : album["collectionName"], 
-							"artist" : album["artistName"], 
-							"image" : album["artworkUrl100"]};
+							"artist" : album["artistName"],
+							"image" : album["artworkUrl100"],
+							"id" : album["collectionId"]};
 				if(banned[item["artist"]]) {
 					item = {"album" : "NO",
 							"artist" : "Just, no.",
@@ -44,6 +44,11 @@ var getAlbums = function(term, callback) {
 	});
 };
 
+var getSongsForAlbum = function(id, callback) {
+	var url = "http://itunes.apple.com/lookup?id=" + id;
+	url += '&entity=song';
+}
+
 var hasUserSelection = function(index) {
 	return cache.has(index);
 }
@@ -55,3 +60,4 @@ var getUserSelection = function(index) {
 exports.getAlbums = getAlbums;
 exports.hasUserSelection = hasUserSelection;
 exports.getUserSelection = getUserSelection;
+exports.getSongsForAlbum = getSongsForAlbum
