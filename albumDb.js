@@ -21,8 +21,9 @@ var addAlbum = function(album, ipAddress, callback) {
 	if(album["album"] && album["artist"] && album["image"] && !duplicates[album["image"]]) {
 		albumRef.push().set(album);
 		callback(null);
+	} else {
+		callback(new Error("Album JSON was missing some items or was a duplicate"));
 	}
-	callback(new Error("Album JSON was missing some items or was a duplicate"));
 };
 
 albumRef.on('child_added', function(snapshot) {

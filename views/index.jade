@@ -8,6 +8,7 @@ block content
 			p
 				form(method="post" action="/newalbum" id="albumAdd")
 					input(id="albums" placeholder="Type in an album name!")
+					span#resultText
 					input(type="hidden" id="index" name="index" onclick="submitAlbum")
 					#albumSelection
 						img(src="" id="album" height=100 width=100)
@@ -15,7 +16,6 @@ block content
 							p(class="albumName")
 							p(class="artistName")
 						input(id="submitAlbum" type="submit" value="Submit")
-					
 	script.
 		$(function() {
 			$('#albumAdd').submit(function(e) {
@@ -24,10 +24,14 @@ block content
 					url : "/newalbum",
 					data : $('#albumAdd').serialize(),
 					success : function(data) {
-						alert(data);
+						$('#resultText').text(data["added"]);
+						$('#resultText').show();
+						$('#resultText').fadeOut(1500);
 					},
 					error : function(data) {
-						alert(data["responseText"]);
+						$('#resultText').text(data["added"]);
+						$('#resultText').show();
+						$('#resultText').fadeOut(1500);
 					}
 				});
 				e.preventDefault();

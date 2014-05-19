@@ -96,6 +96,10 @@ a:link {
   width: 100px;
   height: 20px;
 }
+#resultText {
+  margin-left: 10px;
+  display: none;
+}
 #albumClick {
   height: 700px;
   width: 700px;

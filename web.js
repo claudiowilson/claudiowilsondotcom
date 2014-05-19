@@ -49,13 +49,13 @@ app.post('/newalbum', function(request,response) {
 	if(searcher.hasUserSelection(request.body.index)) {
 		albumDb.addAlbum(searcher.getUserSelection(request.body.index), lookup, function(err) {
 			if(err) {
-				response.json(500, {"added" : "Album was a duplicate"})
+				response.json(200, {"added" : "Album was a duplicate"})
 			} else {
 				response.json(200, {"added" : "Album added!"});
 			}
 		});
 	} else {
-		response.json(500, {"added" : "Something went wrong :("});
+		response.json(200, {"added" : "Something went wrong :("});
 	}
 });
 
