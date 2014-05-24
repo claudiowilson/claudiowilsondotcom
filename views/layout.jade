@@ -38,7 +38,6 @@ html(lang='en')
 			p(class="artistName") Giraffage
 			p Added by someone in Seoul, Korea on May 19, 2014
 
-
 		script.
 			var back = d3.select("#background");
 			var svgHeight = $("#background").height();
@@ -70,8 +69,11 @@ html(lang='en')
 				group.enter().append("g")
 					.attr("class","node")
 					.append("image")
-					.on('click', function() {
-						console.log('swag');
+					.on('click', function(d, i) {
+						$('#albumClick > .albumName').text(d.album);
+						$('#albumClick > .artistName').text(d.artist);
+						$('#album600').attr('src', d.image.replace('100x100', '600x600'));
+						$('#albumClick').show();
 					})
 					.attr("x", function(d, i) {
 						return (i % maxHorizontalAlbums) * 100;
@@ -97,5 +99,11 @@ html(lang='en')
 					.style("opacity", 100);
 					
 			};
+
+			$(window).keydown(function(event) {
+				if(event.keyCode == 27) {
+					$('#albumClick').hide();
+				}
+			});
 			
 	block content

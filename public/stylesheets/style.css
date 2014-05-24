@@ -109,9 +109,11 @@ a:link {
   border: 2px solid #000;
   background: #fff;
   overflow: scroll;
-  padding-left: 50px;
   font-size: small;
   display: none;
+}
+#albumClick > * {
+  margin-left: 50px;
 }
 #album600 {
   margin-top: 50px;
