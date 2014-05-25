@@ -33,10 +33,14 @@ html(lang='en')
 						li 
 							a(href="http://www.twitter.com/claudiyoh") Twitter
 		#albumClick
-			img(src="http://a1.mzstatic.com/us/r30/Music/v4/34/12/6e/34126ef8-6cad-f7a8-aeea-325aa0efd5a7/cover.600x600-75.jpg" id="album600")
-			p(class="albumName") Needs
-			p(class="artistName") Giraffage
-			p Added by someone in Seoul, Korea on May 19, 2014
+			img(src="" id="album600")
+			p(class="albumName")
+			p(class="artistName")
+			p(id="location")
+			hr
+			#songs
+				p(style="font-size:large") Tracks
+
 
 		script.
 			var back = d3.select("#background");
@@ -70,9 +74,24 @@ html(lang='en')
 					.attr("class","node")
 					.append("image")
 					.on('click', function(d, i) {
+						var location = getLocationText(d.location);
+						$('#songs').empty();
 						$('#albumClick > .albumName').text(d.album);
 						$('#albumClick > .artistName').text(d.artist);
+						$('#location').text(location);
 						$('#album600').attr('src', d.image.replace('100x100', '600x600'));
+						$.ajax({
+							type : "GET",
+							url : "/getsongs/" + d.id,
+							success : function(data) {
+								$('#songs').append('<p style="font-size:large">Songs</p>');
+								data.forEach(function(item) {
+									if(item && item.title && item.preview) {
+										$('#songs').append('<p>' + item.title + '</p><audio controls width=600px><source src="' + item.preview + '"type="audio/mp4"/></audio>');
+									}
+								});
+							}
+						});
 						$('#albumClick').show();
 					})
 					.attr("x", function(d, i) {
@@ -99,6 +118,23 @@ html(lang='en')
 					.style("opacity", 100);
 					
 			};
+
+			var getLocationText = function(location) {
+				var text = "Added by someone in ";
+				if (location.city) {
+					text += location.city + ', ';
+				}
+
+				if (location.region) {
+					text += location.region + ', ';
+				}
+
+				if (location.country) {
+					text += location.country;
+				}
+
+				return text;
+			}
 
 			$(window).keydown(function(event) {
 				if(event.keyCode == 27) {

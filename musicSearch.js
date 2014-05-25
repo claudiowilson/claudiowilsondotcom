@@ -1,7 +1,8 @@
 var https = require('https'),
 	lru = require('lru-cache'),
 	banned = {"Miley Cyrus" : true, "Justin Bieber" : true,
-				"One Direction" : true, "Katy Perry" : true, "Hannah Montana" : true, "Selena Gomez" : true},
+				"One Direction" : true, "Katy Perry" : true, "Hannah Montana" : true, "Selena Gomez" : true,
+				"Nickelback" : true},
 	maxItems = 500,
 	options = { max: maxItems,
               	maxAge: 1000 * 60 * 60 },
@@ -9,19 +10,26 @@ var https = require('https'),
 
 var index = 0;
 
-var getAlbums = function(term, callback) {
-	var url = 'https://itunes.apple.com/search?term=' + term;
-	url += '&entity=album&limit=5';
-
+var getRequest = function(url, callback) {
 	https.get(url, function(response) {
 		var str = '';
 		response.on('data', function (chunk) {
 			str += chunk;
 		});
 
-		response.on('end', function () {
+		response.on('end', function() {
 			var result = JSON.parse(str);
-			var obj = result['results'].map(function(album) {
+			callback(result);
+		});
+	});
+}
+
+var getAlbums = function(term, callback) {
+	var url = 'https://itunes.apple.com/search?term=' + term;
+	url += '&entity=album&limit=5';
+
+	getRequest(url, function(result) {
+		var obj = result['results'].map(function(album) {
 				var item = { "album" : album["collectionName"], 
 							"artist" : album["artistName"],
 							"image" : album["artworkUrl100"],
@@ -38,15 +46,25 @@ var getAlbums = function(term, callback) {
 
 				return item;
 			});
-
 			callback(null, obj);
-		});
 	});
 };
 
 var getSongsForAlbum = function(id, callback) {
-	var url = "http://itunes.apple.com/lookup?id=" + id;
+	var url = "https://itunes.apple.com/lookup?id=" + id;
 	url += '&entity=song';
+
+	getRequest(url, function(result) {
+		var obj = result['results'].map(function(song) {
+				if(song["wrapperType"] == "track") {
+					var item =  { "preview" : song["previewUrl"],
+						"title" : song["trackName"] };
+					return item;
+				}
+			});
+
+ 		callback(null, obj);
+	});
 }
 
 var hasUserSelection = function(index) {

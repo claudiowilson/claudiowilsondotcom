@@ -38,6 +38,12 @@ app.get('/search/:name', function(request, response) {
 	});
 });
 
+app.get('/getsongs/:id', function(request, response) {
+	searcher.getSongsForAlbum(request.params.id, function(err, songs) {
+		response.json(200, songs);
+	});
+});
+
 
 app.post('/newalbum', function(request,response) {
 	var result = geoip.lookup(request.connection.remoteAddress);
