@@ -9,13 +9,13 @@ block content
 				form(method="post" action="/newalbum" id="albumAdd")
 					input(id="albums" placeholder="Type in an album name!")
 					span#resultText
-					input(type="hidden" id="index" name="index" onclick="submitAlbum")
+					input(type="hidden" id="index" name="index")
 					#albumSelection
 						img(src="" id="album" height=100 width=100)
 						#albumText
 							p(class="albumName")
 							p(class="artistName")
-						input(id="submitAlbum" type="submit" value="Submit")
+						input(id="submitAlbum" type="submit" value="Submit" onclick='changePage()')
 	script.
 		$(function() {
 			$('#albumAdd').submit(function(e) {
@@ -72,6 +72,9 @@ block content
 				.append( '<a><img src="' + item.icon + '" height="50" width="50"><span>' + item.label + '</span><br><span style="font-size:small">' + item.artist + "</span></a>" )
 				.appendTo( ul );
 			};
-
+			
+		var changePage = function() {
+			filterAlbums(Math.floor((currentNumAlbums + 1)/totalMaxAlbums));
+		}
 		//d3.select("#background")
 			//.attr("class", "blur-on");

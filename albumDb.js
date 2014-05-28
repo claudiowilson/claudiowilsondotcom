@@ -18,7 +18,7 @@ albumRef.auth(token, function(err) {
 
 var addAlbum = function(album, ipAddress, callback) {
 	album["location"] = ipAddress;
-	album["time"] = new Date();
+	album["time"] = new Date().getTime();
 	if(album["album"] && album["artist"] && album["image"] && !duplicates[album["image"]]) {
 		albumRef.push().set(album);
 		callback(null);
