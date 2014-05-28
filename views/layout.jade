@@ -32,6 +32,8 @@ html(lang='en')
 							a(href="http://www.github.com/claudiowilson") Github
 						li 
 							a(href="http://www.twitter.com/claudiyoh") Twitter
+		#footer
+
 		#albumClick
 			img(src="" id="album600")
 			p(class="albumName")
@@ -51,24 +53,29 @@ html(lang='en')
 			var maxVerticalAlbums = Math.floor(svgHeight/100);
 			var maxHorizontalAlbums = Math.floor(svgWidth/100);
 			var totalMaxAlbums = maxVerticalAlbums * maxHorizontalAlbums;
-
-			back.append("defs")
-				.append("filter")
-				.attr("id", "blur")
-				.append("feGaussianBlur")
-				.attr("stdDeviation", 1.5);
+			var numberOfPages = Math.floor(currentNumAlbums/totalMaxAlbums);
 
 			var albums = [];
-
+			var onScreenAlbums = [];
+			var currentPage = Math.floor(Math.random() * numberOfPages);
 			var fb = new Firebase('https://glowing-fire-8113.firebaseIO.com/albums');
+
 			fb.on('child_added', function(snapshot) {
 				albums.push(snapshot.val());
-				rebind();
+				filterAlbums(currentPage);
 			});
 
+			var filterAlbums = function(pageNum) {
+				onScreenAlbums = albums.filter(function(album, index) {
+					if (index >= (pageNum * totalMaxAlbums)) {
+						return album;
+					}
+				});
+				rebind();
+			}
 			var rebind = function() {
 				var group = back.selectAll(".node")
-				.data(albums);
+				.data(onScreenAlbums);
 
 				group.enter().append("g")
 					.attr("class","node")
@@ -116,6 +123,8 @@ html(lang='en')
 						return (i/currentNumAlbums) * duration;
 					})
 					.style("opacity", 100);
+
+					group.exit().remove();
 					
 			};
 
@@ -141,5 +150,14 @@ html(lang='en')
 					$('#albumClick').hide();
 				}
 			});
+
+			for(var i = 0; i <= numberOfPages; i++) {
+				if( i == currentPage) {
+					$('#footer').append('<span class="selected" onclick="filterAlbums(' + i + ')">' + i + '</span>');
+				} else {
+					$('#footer').append('<span onclick="filterAlbums(' + i + ')">' + i + '</span>');
+				}
+				
+			}
 			
 	block content

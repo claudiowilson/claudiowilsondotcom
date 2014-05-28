@@ -62,6 +62,8 @@ a, a:link
 #background
 	position fixed
 	z-index -2
+	overflow-y scroll
+	overflow-x hidden
 
 .albumName
 	margin-top 10px
@@ -113,6 +115,21 @@ a, a:link
 	font-size small
 	display none
 
+#footer
+	margin-top 46em
+	margin-left 1em
+	position fixed
+	float left
+
+#footer > span
+	margin-left 15px
+	font-size x-large
+	font-family 'Signika', sans-serif
+	cursor pointer
+
+.selected
+	color red
+
 #albumClick > *
 	margin-left 50px
 #album600
@@ -129,6 +146,4 @@ a, a:link
 .ui-autocomplete-loading
 	background white url('../images/ui-anim_basic_16x16.gif') right center no-repeat;
 
-.blur-on
-	filter url(#blur)
 
