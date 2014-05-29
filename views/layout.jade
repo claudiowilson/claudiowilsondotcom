@@ -57,7 +57,7 @@ html(lang='en')
 
 			var albums = [];
 			var onScreenAlbums = [];
-			var currentPage = Math.floor(Math.random() * numberOfPages);
+			var currentPage = Math.floor(Math.random() * numberOfPages) + 1;
 			var fb = new Firebase('https://glowing-fire-8113.firebaseIO.com/albums');
 
 			fb.on('child_added', function(snapshot) {
@@ -67,7 +67,7 @@ html(lang='en')
 
 			var filterAlbums = function(pageNum) {
 				onScreenAlbums = albums.filter(function(album, index) {
-					if (index >= (pageNum * totalMaxAlbums)) {
+					if (index < (pageNum * totalMaxAlbums) && index >= (pageNum - 1) * totalMaxAlbums) {
 						return album;
 					}
 				});
@@ -75,8 +75,8 @@ html(lang='en')
 			}
 			var rebind = function() {
 				var group = back.selectAll(".node")
-				.data(onScreenAlbums);
-
+				.data(onScreenAlbums, function(d) { return d.id; });				
+				
 				group.enter().append("g")
 					.attr("class","node")
 					.append("image")
@@ -123,9 +123,8 @@ html(lang='en')
 						return (i/currentNumAlbums) * duration;
 					})
 					.style("opacity", 100);
-
-					group.exit().remove();
 					
+					group.exit().remove();
 			};
 
 			var getLocationText = function(location) {
@@ -153,9 +152,9 @@ html(lang='en')
 
 			for(var i = 0; i <= numberOfPages; i++) {
 				if( i == currentPage) {
-					$('#footer').append('<span class="selected" onclick="filterAlbums(' + i + ')">' + i + '</span>');
+					$('#footer').append('<span class="selected" onclick="filterAlbums(' + (i + 1) + ')">' + (i + 1) + '</span>');
 				} else {
-					$('#footer').append('<span onclick="filterAlbums(' + i + ')">' + i + '</span>');
+					$('#footer').append('<span onclick="filterAlbums(' + (i + 1) + ')">' + (i + 1) + '</span>');
 				}
 				
 			}
