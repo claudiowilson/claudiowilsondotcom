@@ -113,12 +113,6 @@ a:link {
   font-size: small;
   display: none;
 }
-#footer {
-  margin-top: 46em;
-  margin-left: 1em;
-  position: fixed;
-  float: left;
-}
 #footer > span {
   margin-left: 15px;
   font-size: x-large;

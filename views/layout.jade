@@ -32,9 +32,9 @@ html(lang='en')
 							a(href="http://www.github.com/claudiowilson") Github
 						li 
 							a(href="http://www.twitter.com/claudiyoh") Twitter
-		#footer
 
 		#albumClick
+			p(onclick="$('#albumClick').hide();") Close
 			img(src="" id="album600")
 			p(class="albumName")
 			p(class="artistName")
@@ -57,7 +57,7 @@ html(lang='en')
 
 			var albums = [];
 			var onScreenAlbums = [];
-			var currentPage = Math.floor(Math.random() * numberOfPages) + 1;
+			var currentPage = Math.floor(Math.random() * (numberOfPages + 1)) + 1;
 			var fb = new Firebase('https://glowing-fire-8113.firebaseIO.com/albums');
 
 			fb.on('child_added', function(snapshot) {
@@ -147,16 +147,33 @@ html(lang='en')
 			$(window).keydown(function(event) {
 				if(event.keyCode == 27) {
 					$('#albumClick').hide();
+				} else if (event.keyCode == 37 && (currentPage > 1)) {
+					currentPage -= 1;
+					changePage(currentPage);
+				} else if (event.keyCode == 39 && (currentPage <= numberOfPages)) {
+					currentPage += 1;
+					changePage(currentPage);
 				}
+
+				console.log(event.keyCode);
+				//if(event.keyCode)
 			});
 
+
+			$('body').append('<div id="footer" style="float:left; position:fixed; margin-left:1em; margin-top:' + (svgHeight - 75) + 'px;"></div>');
+
 			for(var i = 0; i <= numberOfPages; i++) {
-				if( i == currentPage) {
-					$('#footer').append('<span class="selected" onclick="filterAlbums(' + (i + 1) + ')">' + (i + 1) + '</span>');
+				if( (i + 1) == currentPage) {
+					$('#footer').append('<span id="' + (i + 1) + '" class="selected" onclick="changePage(' + (i + 1) + ')">' + (i + 1) + '</span>');
 				} else {
-					$('#footer').append('<span onclick="filterAlbums(' + (i + 1) + ')">' + (i + 1) + '</span>');
+					$('#footer').append('<span id="' + (i + 1) + '" onclick="changePage(' + (i + 1) + ')">' + (i + 1) + '</span>');
 				}
-				
+			}
+
+			var changePage = function(pageNum) {
+				$('#footer > span').removeClass("selected");
+				$('#' + pageNum).addClass("selected");
+				filterAlbums(pageNum);
 			}
 			
 	block content
