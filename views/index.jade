@@ -7,7 +7,7 @@ block content
 			|	Visiting? Leave a mark by adding some album art to my background!
 			p
 				form(method="post" action="/newalbum" id="albumAdd")
-					input(id="albums" placeholder="Type in an album name!")
+					input(id="albums" placeholder="Artist? Album name?")
 					span#resultText
 					input(type="hidden" id="index" name="index")
 					#albumSelection
@@ -15,7 +15,7 @@ block content
 						#albumText
 							p(class="albumName")
 							p(class="artistName")
-						input(id="submitAlbum" type="submit" value="Submit" onclick='changePage()')
+						input(id="submitAlbum" type="submit" value="Submit" onclick='changePage(' + (numberOfPages + 1) + ')')
 	script.
 		$(function() {
 			$('#albumAdd').submit(function(e) {
@@ -72,9 +72,6 @@ block content
 				.append( '<a><img src="' + item.icon + '" height="50" width="50"><span>' + item.label + '</span><br><span style="font-size:small">' + item.artist + "</span></a>" )
 				.appendTo( ul );
 			};
-			
-		var changePage = function() {
-			filterAlbums(Math.floor((currentNumAlbums + 1)/totalMaxAlbums));
-		}
+
 		//d3.select("#background")
 			//.attr("class", "blur-on");
