@@ -15,7 +15,7 @@ block content
 						#albumText
 							p(class="albumName")
 							p(class="artistName")
-						input(id="submitAlbum" type="submit" value="Submit" onclick='changePage(' + (numberOfPages + 1) + ')')
+						input(id="submitAlbum" type="submit" value="Submit")
 	script.
 		$(function() {
 			$('#albumAdd').submit(function(e) {
@@ -27,6 +27,7 @@ block content
 						$('#resultText').text(data["added"]);
 						$('#resultText').show();
 						$('#resultText').fadeOut(1500);
+						changePage(numberOfPages + 1);
 					},
 					error : function(data) {
 						$('#resultText').text(data["added"]);
