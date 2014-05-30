@@ -34,7 +34,7 @@ html(lang='en')
 							a(href="http://www.twitter.com/claudiyoh") Twitter
 
 		#albumClick
-			p(onclick="$('#albumClick').hide();") Close
+			p(onclick="$('#albumClick').hide();" style="font-weight:bold") Close
 			img(src="" id="album600")
 			p(class="albumName")
 			p(class="artistName")
@@ -155,8 +155,6 @@ html(lang='en')
 					changePage(currentPage);
 				}
 
-				console.log(event.keyCode);
-				//if(event.keyCode)
 			});
 
 
