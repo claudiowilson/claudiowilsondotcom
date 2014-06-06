@@ -112,16 +112,10 @@ html(lang='en')
 					.attr("height", 100)
 					.attr("xlink:href", function(d, i) {
 						return d.image;
-					})
-					.style("opacity", 0)
+					});
+
+					back.style("opacity", 0)
 					.transition().duration(2000)
-					.delay(function(d, i) {
-						if(i == currentNumAlbums) {
-							currentNumAlbums++;
-							return 0;
-						}
-						return (i/currentNumAlbums) * duration;
-					})
 					.style("opacity", 100);
 					
 					group.exit().remove();
@@ -169,6 +163,7 @@ html(lang='en')
 			}
 
 			var changePage = function(pageNum) {
+				currentPage = pageNum;
 				$('#footer > span').removeClass("selected");
 				$('#' + pageNum).addClass("selected");
 				filterAlbums(pageNum);
