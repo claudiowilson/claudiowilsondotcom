@@ -2,6 +2,7 @@ var express = require('express'),
 	stylus = require('stylus'),
 	searcher = require('./musicSearch'),
 	albumDb = require('./albumDb'),
+	posts = require('./postParser'),
 	cookieParser = require('cookie-parser'),
 	bodyParser = require('body-parser'),
 	session = require('express-session'),
@@ -26,6 +27,10 @@ app.get('/', function(request, response) {
 
 app.get('/index', function(request, response) {
 	response.render('index.jade', {count : albumDb.count()});
+});
+
+app.get('/blog/index', function(request, response) {
+	response.render('blogindex.jade', {count : albumDb.count()});
 });
 
 app.get('/search/:name', function(request, response) {
