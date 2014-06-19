@@ -1,13 +1,12 @@
 extend layout
 block content
 	.blogcontainer
-		.blogindex
-			h2 Posts
-			table
-				for album in albums
-					tr
-						td
-							| #{album.title}
-						td
-							| #{album.date}
+		h2 Posts
+		table
+			for post in posts
+				tr
+					td
+						a(href="/blog/#{post.url}") #{post.title}
+					td
+						| #{post.date}
 

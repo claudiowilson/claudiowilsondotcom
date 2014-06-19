@@ -4,7 +4,9 @@
 
 body
 	font-family 'Open Sans', sans-serif
-	font-weight 300
+	font-weight 400
+	font-size large
+	overflow hidden
 
 .content
 	margin-top 15.5em
@@ -14,8 +16,8 @@ body
 .container
 	border 2px solid black
 
-.content .container
-	overflow hidden
+.scroll
+	overflow scroll
 
 .container:hover
 	opacity 1
@@ -93,7 +95,7 @@ a, a:link
 	border-radius 2.5px
 	-moz-border-radius 2.5px
 	-webkit-border-radius 2.5px
-	width 120px
+	width 150px
 	height 20px
 
 #resultText
@@ -120,18 +122,17 @@ a, a:link
 	cursor pointer
 
 .blogcontainer
+	max-width 600px
+	max-height 700px
 	margin-top 7.4em
-	margin-left 37em
+	margin-left 30em
 	float left
 	background-color white
 	padding 20px
 	border 2px solid black
 	position absolute
-	overflow scroll
+	overflow hidden
 
-.blogindex
-	max-height 500px
-	max-width 600px
 
 .selected
 	color red

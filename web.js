@@ -29,10 +29,17 @@ app.get('/index', function(request, response) {
 	response.render('index.jade', {count : albumDb.count()});
 });
 
-app.get('/blog/index', function(request, response) {
-	posts.getPosts(function(err, data) {
-			response.render('blogindex.jade', {count : albumDb.count(), albums : data});
-	});
+app.get('/blog/:blogname', function(request, response) {
+	if (request.params.blogname == 'index') {
+		posts.getPosts(function(err, data) {
+			response.render('blogindex.jade', {count : albumDb.count(), posts : data});
+		});
+	} else {
+		posts.getHtmlFromMd(request.params.blogname, function(err, html) {
+			response.render('blogpost.jade', {count : albumDb.count(), post : html});
+		});
+	}
+	
 });
 
 app.get('/search/:name', function(request, response) {
