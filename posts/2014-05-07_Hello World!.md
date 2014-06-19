@@ -21,4 +21,6 @@ Next, I dove into some Nodejs + Express. Despite the application not making it i
 
 Passing functions around as data in Node and higher order functions like in LINQ started making me appreciate functional programming styles more, and I've decided to start learning Haskell.
 
-Point being, if you ever get the opportunity to take an internship wherein the company trusts its interns and gives them _real_, _non trivial_, work, do it. There's nothing better for your own progress and development (in my opinion) than being thrown in the deep end and being forced to do or die. 
+### Reflections
+
+If you ever get the opportunity to take an internship wherein the company trusts its interns and gives them _real_, _non trivial_ work, do it. There's nothing better for your own progress and development (in my opinion) than being thrown in the deep end and being forced to do or die. 
