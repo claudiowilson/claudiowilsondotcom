@@ -4,19 +4,10 @@ block content
 		.blogindex
 			h2 Posts
 			table
-				tr
-					td
-						| My First Blog Post
-					td
-						| July 1, 1993
-				tr
-					td
-						| My First Blog Post
-					td
-						| July 1, 1993
-				tr
-					td
-						| My First Blog Post
-					td
-						| July 1, 1993					
+				for album in albums
+					tr
+						td
+							| #{album.title}
+						td
+							| #{album.date}
 

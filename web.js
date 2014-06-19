@@ -30,7 +30,9 @@ app.get('/index', function(request, response) {
 });
 
 app.get('/blog/index', function(request, response) {
-	response.render('blogindex.jade', {count : albumDb.count()});
+	posts.getPosts(function(err, data) {
+			response.render('blogindex.jade', {count : albumDb.count(), albums : data});
+	});
 });
 
 app.get('/search/:name', function(request, response) {

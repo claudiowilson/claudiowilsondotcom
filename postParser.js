@@ -1,7 +1,7 @@
 var fs = require('fs'),
 	marked = require('marked'),
 	folderName = './posts',
-	regex = '([0-9]*-[0-9]*-[0-9]*)_([a-zA-Z ]*)\.md';
+	regex = '([0-9]*-[0-9]*-[0-9]*)_([a-zA-Z ,!]*)\.md';
 
 var getPosts = function(callback) {
 	fs.readdir(folderName, function(err, files) {
