@@ -3,7 +3,9 @@
 @import url("https://fonts.googleapis.com/css?family=Signika:400,700");
 body {
   font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
+  font-size: large;
+  overflow: hidden;
 }
 .content {
   margin-top: 15.5em;
@@ -13,8 +15,8 @@ body {
 .container {
   border: 2px solid #000;
 }
-.content .container {
-  overflow: hidden;
+.scroll {
+  overflow: scroll;
 }
 .container:hover {
   opacity: 1;
@@ -41,8 +43,8 @@ body {
   list-style-type: none;
   margin-top: 10px;
 }
-a,
-a:link {
+#sidebar a,
+#sidebar a:link {
   text-decoration: none;
   color: #000;
 }
@@ -93,7 +95,7 @@ a:link {
   border-radius: 2.5px;
   -moz-border-radius: 2.5px;
   -webkit-border-radius: 2.5px;
-  width: 120px;
+  width: 150px;
   height: 20px;
 }
 #resultText {
@@ -119,18 +121,16 @@ a:link {
   cursor: pointer;
 }
 .blogcontainer {
+  max-width: 40%;
+  max-height: 70%;
   margin-top: 7.4em;
-  margin-left: 37em;
+  margin-left: 30em;
   float: left;
   background-color: #fff;
   padding: 20px;
   border: 2px solid #000;
   position: absolute;
-  overflow: scroll;
-}
-.blogindex {
-  max-height: 500px;
-  max-width: 600px;
+  overflow: hidden;
 }
 .selected {
   color: #f00;

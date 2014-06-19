@@ -1,8 +1,8 @@
 Hello World!
 ==================
-I apologize for the cheesy title and my less than perfect prose. The following blog post is mostly personal and depicts my growth as a programmer over the past year.
+I apologize for the cheesy title and my less than perfect prose. The following blog post is mostly personal and depicts my growth as a programmer.
 
-The past year has been nothing short of an amazing journey. After my first year at the University of Texas, I got an internship at [Telogis](http://www.telogis.com), writing C#. I stayed on full-time after the summer internship to gain in-state residency and cut tuition costs by about 75%. My programming knowledge prior to the internship had been shaky at best (I was a freshman and relied only on what I had learned in high school), with some data structures knowledge and a novice understanding of Java, but one year of programming in various languages and a voracious appetite for knowledge has done wonders for my technical knowledge.
+The past year has been nothing short of an amazing journey. After my first year at the University of Texas, I got an internship at [Telogis](http://www.telogis.com), writing C#. I stayed on full-time after the summer internship to gain in-state residency and cut tuition costs by about 75%. My programming knowledge prior to the internship had been shaky at best (I was a freshman and relied only on what I had learned in high school), with a understanding of data structures and a novice familiarity with Java, but one year of programming in various languages and a voracious appetite for knowledge has done wonders for my technical prowess.
 
 ### Full Stack Web Development
 
