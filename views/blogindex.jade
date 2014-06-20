@@ -4,9 +4,10 @@ block content
 		h2 Posts
 		table
 			for post in posts
-				tr
-					td
-						a(href="/blog/#{post.url}") #{post.title}
-					td
-						| #{post.date}
+				if post
+					tr
+						td
+							a(href="/blog/#{post.url}") #{post.title}
+						td
+							| #{post.date}
 
