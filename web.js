@@ -58,6 +58,10 @@ app.get('/getsongs/:id', function(request, response) {
 	});
 });
 
+app.get('/contact', function(request, response) {
+	response.render('contact.jade', {count: albumDb.count()});
+});
+
 
 app.post('/newalbum', function(request,response) {
 	var result = geoip.lookup(request.connection.remoteAddress);
