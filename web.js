@@ -22,7 +22,7 @@ app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(request, response) {
-	response.render('layout.jade', {count : albumDb.count()});
+	response.render('index.html');
 });
 
 app.get('/index', function(request, response) {
