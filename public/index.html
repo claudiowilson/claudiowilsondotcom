@@ -4,16 +4,20 @@
 	<title>claudio</title>
 	<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-	<script src="https://cdn.firebase.com/js/client/1.0.11/firebase.js"></script>
-	<script src="/bower_components/d3/d3.min.js"></script>
 	<script src="/bower_components/angular/angular.min.js"></script>
 	<script src="/bower_components/angular-route/angular-route.min.js"></script>
+	<script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
+	<script src='https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js'></script>
+	<script src="/bower_components/d3/d3.min.js"></script>
 	<script src="/js/app.js"></script>
 	<script src="/js/controllers.js"></script>
 	<link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
-	<svg id="background" ng-controller="albumController"></svg>
+	<svg id="background" ng-controller="albumController">
+		<image ng-repeat="album in albums" ng-attr-x="{{album.x}}" 
+		ng-attr-y="{{album.y}}" ng-attr-href="{{album.image}}" width="100" height="100"></image>
+	</svg>
 	<div id="sidebar">
 	  <div id="header">
 	    <h4>
@@ -34,127 +38,127 @@
 	<div ng-view></div>
 </body>
 <script>
-			var back = d3.select("#background");
-			var svgHeight = $("#background").height();
-			var svgWidth = $("#background").width();
-			var duration = 5000;
-			var currentNumAlbums = 102;
-			var maxVerticalAlbums = Math.floor(svgHeight/100);
-			var maxHorizontalAlbums = Math.floor(svgWidth/100);
-			var totalMaxAlbums = maxVerticalAlbums * maxHorizontalAlbums;
-			var numberOfPages = Math.floor(currentNumAlbums/totalMaxAlbums);
+			// var back = d3.select("#background");
+			// var svgHeight = $("#background").height();
+			// var svgWidth = $("#background").width();
+			// var duration = 5000;
+			// var currentNumAlbums = 102;
+			// var maxVerticalAlbums = Math.floor(svgHeight/100);
+			// var maxHorizontalAlbums = Math.floor(svgWidth/100);
+			// var totalMaxAlbums = maxVerticalAlbums * maxHorizontalAlbums;
+			// var numberOfPages = Math.floor(currentNumAlbums/totalMaxAlbums);
 
-			var albums = [];
-			var onScreenAlbums = [];
-			var currentPage = Math.floor(Math.random() * (numberOfPages + 1)) + 1;
-			var fb = new Firebase('https://glowing-fire-8113.firebaseIO.com/albums');
+			// var albums = [];
+			// var onScreenAlbums = [];
+			// var currentPage = Math.floor(Math.random() * (numberOfPages + 1)) + 1;
+			// var fb = new Firebase('https://glowing-fire-8113.firebaseIO.com/albums');
 
-			fb.on('child_added', function(snapshot) {
-				albums.push(snapshot.val());
-				filterAlbums(currentPage);
-			});
+			// fb.on('child_added', function(snapshot) {
+			// 	albums.push(snapshot.val());
+			// 	filterAlbums(currentPage);
+			// });
 
-			var filterAlbums = function(pageNum) {
-				onScreenAlbums = albums.filter(function(album, index) {
-					if (index < (pageNum * totalMaxAlbums) && index >= (pageNum - 1) * totalMaxAlbums) {
-						return album;
-					}
-				});
-				rebind();
-			}
-			var rebind = function() {
-				var group = back.selectAll(".node")
-				.data(onScreenAlbums, function(d) { return d.id; });				
+			// var filterAlbums = function(pageNum) {
+			// 	onScreenAlbums = albums.filter(function(album, index) {
+			// 		if (index < (pageNum * totalMaxAlbums) && index >= (pageNum - 1) * totalMaxAlbums) {
+			// 			return album;
+			// 		}
+			// 	});
+			// 	rebind();
+			// }
+			// var rebind = function() {
+			// 	var group = back.selectAll(".node")
+			// 	.data(onScreenAlbums, function(d) { return d.id; });				
 				
-				group.enter().append("g")
-					.attr("class","node")
-					.append("image")
-					.on('click', function(d, i) {
-						var location = getLocationText(d.location);
-						$('#songs').empty();
-						$('#albumClick > .albumName').text(d.album);
-						$('#albumClick > .artistName').text(d.artist);
-						$('#location').text(location);
-						$('#album600').attr('src', d.image.replace('100x100', '600x600'));
-						$.ajax({
-							type : "GET",
-							url : "/getsongs/" + d.id,
-							success : function(data) {
-								$('#songs').append('<p style="font-size:large">Songs</p>');
-								data.forEach(function(item) {
-									if(item && item.title && item.preview) {
-										$('#songs').append('<p>' + item.title + '</p><audio controls width=600px><source src="' + item.preview + '"type="audio/mp4"/></audio>');
-									}
-								});
-							}
-						});
-						$('#albumClick').show();
-					})
-					.attr("x", function(d, i) {
-						return (i % maxHorizontalAlbums) * 100;
-					})
-					.attr("y", function(d, i) {
-						var coeff = Math.floor(i / maxHorizontalAlbums);
-						return 100 * coeff;
-					})
-					.attr("width",100)
-					.attr("height", 100)
-					.attr("xlink:href", function(d, i) {
-						return d.image;
-					});
+			// 	group.enter().append("g")
+			// 		.attr("class","node")
+			// 		.append("image")
+			// 		.on('click', function(d, i) {
+			// 			var location = getLocationText(d.location);
+			// 			$('#songs').empty();
+			// 			$('#albumClick > .albumName').text(d.album);
+			// 			$('#albumClick > .artistName').text(d.artist);
+			// 			$('#location').text(location);
+			// 			$('#album600').attr('src', d.image.replace('100x100', '600x600'));
+			// 			$.ajax({
+			// 				type : "GET",
+			// 				url : "/getsongs/" + d.id,
+			// 				success : function(data) {
+			// 					$('#songs').append('<p style="font-size:large">Songs</p>');
+			// 					data.forEach(function(item) {
+			// 						if(item && item.title && item.preview) {
+			// 							$('#songs').append('<p>' + item.title + '</p><audio controls width=600px><source src="' + item.preview + '"type="audio/mp4"/></audio>');
+			// 						}
+			// 					});
+			// 				}
+			// 			});
+			// 			$('#albumClick').show();
+			// 		})
+			// 		.attr("x", function(d, i) {
+			// 			return (i % maxHorizontalAlbums) * 100;
+			// 		})
+			// 		.attr("y", function(d, i) {
+			// 			var coeff = Math.floor(i / maxHorizontalAlbums);
+			// 			return 100 * coeff;
+			// 		})
+			// 		.attr("width",100)
+			// 		.attr("height", 100)
+			// 		.attr("xlink:href", function(d, i) {
+			// 			return d.image;
+			// 		});
 
-					back.style("opacity", 0)
-					.transition().duration(2000)
-					.style("opacity", 100);
+			// 		back.style("opacity", 0)
+			// 		.transition().duration(2000)
+			// 		.style("opacity", 100);
 					
-					group.exit().remove();
-			};
+			// 		group.exit().remove();
+			// };
 
-			var getLocationText = function(location) {
-				var text = "Added by someone in ";
-				if (location.city) {
-					text += location.city + ', ';
-				}
+			// var getLocationText = function(location) {
+			// 	var text = "Added by someone in ";
+			// 	if (location.city) {
+			// 		text += location.city + ', ';
+			// 	}
 
-				if (location.region) {
-					text += location.region + ', ';
-				}
+			// 	if (location.region) {
+			// 		text += location.region + ', ';
+			// 	}
 
-				if (location.country) {
-					text += location.country;
-				}
+			// 	if (location.country) {
+			// 		text += location.country;
+			// 	}
 
-				return text;
-			}
+			// 	return text;
+			// }
 
-			$(window).keydown(function(event) {
-				if(event.keyCode == 27) {
-					$('#albumClick').hide();
-				} else if (event.keyCode == 37 && (currentPage > 1)) {
-					currentPage -= 1;
-					changePage(currentPage);
-				} else if (event.keyCode == 39 && (currentPage <= numberOfPages)) {
-					currentPage += 1;
-					changePage(currentPage);
-				}
+			// $(window).keydown(function(event) {
+			// 	if(event.keyCode == 27) {
+			// 		$('#albumClick').hide();
+			// 	} else if (event.keyCode == 37 && (currentPage > 1)) {
+			// 		currentPage -= 1;
+			// 		changePage(currentPage);
+			// 	} else if (event.keyCode == 39 && (currentPage <= numberOfPages)) {
+			// 		currentPage += 1;
+			// 		changePage(currentPage);
+			// 	}
 
-			});
+			// });
 
 
-			$('body').append('<div id="footer" style="float:left; position:fixed; margin-left:1em; margin-top:' + (svgHeight - 75) + 'px;"></div>');
+			// $('body').append('<div id="footer" style="float:left; position:fixed; margin-left:1em; margin-top:' + (svgHeight - 75) + 'px;"></div>');
 
-			for(var i = 0; i <= numberOfPages; i++) {
-				if( (i + 1) == currentPage) {
-					$('#footer').append('<span id="' + (i + 1) + '" class="selected" onclick="changePage(' + (i + 1) + ')">' + (i + 1) + '</span>');
-				} else {
-					$('#footer').append('<span id="' + (i + 1) + '" onclick="changePage(' + (i + 1) + ')">' + (i + 1) + '</span>');
-				}
-			}
+			// for(var i = 0; i <= numberOfPages; i++) {
+			// 	if( (i + 1) == currentPage) {
+			// 		$('#footer').append('<span id="' + (i + 1) + '" class="selected" onclick="changePage(' + (i + 1) + ')">' + (i + 1) + '</span>');
+			// 	} else {
+			// 		$('#footer').append('<span id="' + (i + 1) + '" onclick="changePage(' + (i + 1) + ')">' + (i + 1) + '</span>');
+			// 	}
+			// }
 
-			var changePage = function(pageNum) {
-				currentPage = pageNum;
-				$('#footer > span').removeClass("selected");
-				$('#' + pageNum).addClass("selected");
-				filterAlbums(pageNum);
-			}
+			// var changePage = function(pageNum) {
+			// 	currentPage = pageNum;
+			// 	$('#footer > span').removeClass("selected");
+			// 	$('#' + pageNum).addClass("selected");
+			// 	filterAlbums(pageNum);
+			// }
 </script>
