@@ -64,6 +64,8 @@ body {
   z-index: -2;
   overflow-y: scroll;
   overflow-x: hidden;
+  height: 100%;
+  width: 100%;
 }
 .albumName {
   margin-top: 10px;

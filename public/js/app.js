@@ -5,8 +5,8 @@ var claudiowilsondotcom = angular.module('claudiowilsondotcom',
 
 claudiowilsondotcom.config(['$routeProvider', function($routeProvider) {
 	$routeProvider.
-		when('/swag', {
-			templateUrl : 'index.html',
-			controller : 'albumController'
+		when('/index', {
+			templateUrl : 'partials/add.html',
+			controller: 'searchAlbumController'
 		});
 }]);

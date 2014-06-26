@@ -3,9 +3,6 @@ var express = require('express'),
 	searcher = require('./musicSearch'),
 	albumDb = require('./albumDb'),
 	posts = require('./postParser'),
-	cookieParser = require('cookie-parser'),
-	bodyParser = require('body-parser'),
-	session = require('express-session'),
 	geoip = require('geoip-lite');
 
 var app = express();
@@ -14,20 +11,8 @@ app.use(stylus.middleware({
 	dest: __dirname + '/public'
 }));
 
-app.use(cookieParser());
-app.use(session({secret: 'yolo'}));
-app.use(bodyParser.urlencoded());
-
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
-
-app.get('/', function(request, response) {
-	response.render('index.html');
-});
-
-app.get('/index', function(request, response) {
-	response.render('index.jade', {count : albumDb.count()});
-});
 
 app.get('/blog/:blogname', function(request, response) {
 	if (request.params.blogname == 'index') {
@@ -58,29 +43,24 @@ app.get('/getsongs/:id', function(request, response) {
 	});
 });
 
-app.get('/contact', function(request, response) {
-	response.render('contact.jade', {count: albumDb.count()});
-});
-
-
 app.post('/newalbum', function(request,response) {
 	var result = geoip.lookup(request.connection.remoteAddress);
 	var lookup = result ? result : {"country" : "Unknown"};
 	if (request.connection.remoteAddress == "127.0.0.1") {
 		lookup = { "country" : "Claudio's Computer" };
 	}
-
-	if(searcher.hasUserSelection(request.body.index)) {
-		albumDb.addAlbum(searcher.getUserSelection(request.body.index), lookup, function(err) {
-			if(err) {
-				response.json(200, {"added" : "Album was a duplicate"})
-			} else {
-				response.json(200, {"added" : "Album added!"});
-			}
-		});
-	} else {
-		response.json(200, {"added" : "Something went wrong :("});
-	}
+	
+	// if(searcher.hasUserSelection(request.body.index)) {
+	// 	albumDb.addAlbum(searcher.getUserSelection(request.body.index), lookup, function(err) {
+	// 		if(err) {
+	// 			response.json(200, {"added" : "Album was a duplicate"})
+	// 		} else {
+	// 			response.json(200, {"added" : "Album added!"});
+	// 		}
+	// 	});
+	// } else {
+	// 	response.json(200, {"added" : "Something went wrong :("});
+	// }
 });
 
 var port = process.env.PORT || 80;
