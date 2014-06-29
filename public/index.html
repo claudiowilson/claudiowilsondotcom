@@ -16,8 +16,7 @@
 <body>
 <div ng-controller="albumController">
 	<div id="background">
-			<img ng-repeat="album in albums" height="100" width="100" ng-click="showAlbum(album.image, album.artist, album.album, album.location, album.id)" ng-attr-src="{{album.image}}" ng-attr-data-artist="{{album.artist}}" ng-attr-data-album="{{album.album}}"
-			ng-attr-data-location="{{album.location}}" ng-attr-data-id="{{album.id}}" >
+			<img ng-repeat="album in albums" height="100" width="100" ng-click="showAlbum(album.image, album.artist, album.album, album.location, album.id)" ng-attr-src="{{album.image}}">
 	</div>
 	<div id="sidebar">
 	  <div id="header">

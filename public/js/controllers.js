@@ -58,6 +58,20 @@ cwController.controller('searchAlbumController', ['$scope','$http', function($sc
 
 }]);
 
+cwController.controller('blogIndexController', ['$scope', '$http', function($scope, $http) {
+	$http({method: 'GET', url:'/blog/index'})
+	.success(function(data, status) {
+		$scope.posts = data;
+	});
+}]);
+
+cwController.controller('blogController', ['$scope', '$http', '$ce', '$routeParams', function($scope, $http, $sce, $routeParams) {
+	$http({method: 'GET', url:'/blog/' + $routeParams.blogurl})
+	.success(function(data, status) {
+		console.log(data);
+	})
+}]);
+
 cwController.directive('autocomplete', function() {
 	return {
 		restrict : 'A',

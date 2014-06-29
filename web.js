@@ -21,11 +21,11 @@ app.use(express.static(__dirname + '/public'));
 app.get('/blog/:blogname', function(request, response) {
 	if (request.params.blogname == 'index') {
 		posts.getPosts(function(err, data) {
-			response.render('blogindex.jade', {count : albumDb.count(), posts : data});
+			response.json(200, data);
 		});
 	} else {
 		posts.getHtmlFromMd(request.params.blogname, function(err, html) {
-			response.render('blogpost.jade', {count : albumDb.count(), post : html});
+			response.json(200, html);
 		});
 	}
 	
