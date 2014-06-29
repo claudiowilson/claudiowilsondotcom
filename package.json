@@ -9,8 +9,6 @@
 		"stylus" : "0.38.x",
 		"firebase" : "1.0.14",
 		"firebase-token-generator" : "0.1.4",
-		"cookie-parser" : "1.0.1",
-		"express-session" : "1.0.4",
 		"body-parser" : "1.0.2",
 		"lru-cache" : "2.5.0",
 		"geoip-lite" : "1.1.3",

@@ -8,5 +8,8 @@ claudiowilsondotcom.config(['$routeProvider', function($routeProvider) {
 		when('/index', {
 			templateUrl : 'partials/add.html',
 			controller: 'searchAlbumController'
+		}).
+		when('/contact', {
+			templateUrl : 'partials/contact.html'
 		});
 }]);

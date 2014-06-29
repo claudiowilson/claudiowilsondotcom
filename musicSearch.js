@@ -55,6 +55,9 @@ var getSongsForAlbum = function(id, callback) {
 	url += '&entity=song';
 
 	getRequest(url, function(result) {
+		result['results'] = result['results'].filter(function(song) {
+			return song["wrapperType"] == "track";
+		});
 		var obj = result['results'].map(function(song) {
 				if(song["wrapperType"] == "track") {
 					var item =  { "preview" : song["previewUrl"],

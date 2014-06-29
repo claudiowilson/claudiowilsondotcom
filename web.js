@@ -3,6 +3,7 @@ var express = require('express'),
 	searcher = require('./musicSearch'),
 	albumDb = require('./albumDb'),
 	posts = require('./postParser'),
+	bodyParser = require('body-parser'),
 	geoip = require('geoip-lite');
 
 var app = express();
@@ -10,6 +11,9 @@ app.use(stylus.middleware({
 	src: __dirname + '/views',
 	dest: __dirname + '/public'
 }));
+
+app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
 
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
@@ -50,17 +54,17 @@ app.post('/newalbum', function(request,response) {
 		lookup = { "country" : "Claudio's Computer" };
 	}
 	
-	// if(searcher.hasUserSelection(request.body.index)) {
-	// 	albumDb.addAlbum(searcher.getUserSelection(request.body.index), lookup, function(err) {
-	// 		if(err) {
-	// 			response.json(200, {"added" : "Album was a duplicate"})
-	// 		} else {
-	// 			response.json(200, {"added" : "Album added!"});
-	// 		}
-	// 	});
-	// } else {
-	// 	response.json(200, {"added" : "Something went wrong :("});
-	// }
+	if(searcher.hasUserSelection(request.body.index)) {
+		albumDb.addAlbum(searcher.getUserSelection(request.body.index), lookup, function(err) {
+			if(err) {
+				response.json(200, {"added" : "Album was a duplicate"})
+			} else {
+				response.json(200, {"added" : "Album added!"});
+			}
+		});
+	} else {
+		response.json(200, {"added" : "Something went wrong :("});
+	}
 });
 
 var port = process.env.PORT || 80;

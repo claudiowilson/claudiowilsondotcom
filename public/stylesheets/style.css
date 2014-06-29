@@ -91,7 +91,6 @@ body {
 #albumSelection {
   overflow: hidden;
   margin-top: 20px;
-  display: none;
 }
 #albums {
   border-radius: 2.5px;
@@ -114,7 +113,7 @@ body {
   background: #fff;
   overflow: scroll;
   font-size: small;
-  display: none;
+  z-index: 999;
 }
 #footer > span {
   margin-left: 15px;
@@ -133,6 +132,9 @@ body {
   border: 2px solid #000;
   position: absolute;
   overflow: hidden;
+}
+#background > img {
+  cursor: pointer;
 }
 .selected {
   color: #f00;

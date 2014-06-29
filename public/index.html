@@ -14,9 +14,10 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 </head>
 <body>
-	<div id="background" ng-controller="albumController">
-			<img ng-repeat="album in albums" height="100" width="100" ng-attr-src="{{album.image}}" ng-attr-data-artist="{{album.artist}}" ng-attr-data-album="{{album.album}}"
-			ng-attr-data-location="{{album.location}}"></img>
+<div ng-controller="albumController">
+	<div id="background">
+			<img ng-repeat="album in albums" height="100" width="100" ng-click="showAlbum(album.image, album.artist, album.album, album.location, album.id)" ng-attr-src="{{album.image}}" ng-attr-data-artist="{{album.artist}}" ng-attr-data-album="{{album.album}}"
+			ng-attr-data-location="{{album.location}}" ng-attr-data-id="{{album.id}}" >
 	</div>
 	<div id="sidebar">
 	  <div id="header">
@@ -35,5 +36,23 @@
 		  </ul>
 		</div>
 	</div>
+	<div id="albumClick" ng-show="image">
+		<p ng-click="hideAlbum()" style="font-weight:bold">Close</p>
+		<img ng-src="{{image}}" id="album600">
+		<p class="albumName"> {{albumName}} </p>
+		<p class="artistName"> {{artistName}} </p>
+		<p id="location">{{location}}</p>
+		<hr>
+		<div id="songs">
+			<p style="font-size:large">Tracks</p>
+			<div ng-repeat="song in songs">
+				<p>{{song.title}}</p>
+				<audio controls width=600px>
+					<source ng-src="{{song.preview}}" type="audio/mp4"/>
+				</audio>
+			</div>
+		</div>
+	</div>
+</div>
 	<div ng-view></div>
 </body>

@@ -7,13 +7,52 @@ cwController.factory('AlbumService', ['$firebase', function($firebase) {
 	return $firebase(ref);
 }]);
 
-cwController.controller('albumController', ['$scope','AlbumService', function($scope, factory) {
+cwController.controller('albumController', ['$scope','AlbumService', '$http', '$sce', function($scope, factory, $http, $sce) {
 	$scope.albums = factory;
+
+	$scope.showAlbum = function(image, artist, album, location, id) {
+		$scope.image = image.replace('100x100', '600x600');
+		$scope.artistName = artist;
+		$scope.albumName = album;
+		$scope.location = getLocationText(location);
+		$http({method: 'GET', url: '/getsongs/' + id})
+		.success(function(data, status) {
+			$scope.songs = data.map(function(item) {
+				item["preview"] = $sce.trustAsResourceUrl(item["preview"]);
+				return item;
+			});
+		});
+	}
+
+	$scope.hideAlbum = function() {
+		$scope.image = "";
+	}
+
+	var getLocationText = function(location) {
+		 var text = "Added by someone in ";
+		 if (location.city) {
+		  text += location.city + ', ';
+		 }
+		 
+		 if (location.region) {
+		  text += location.region + ', ';
+		 }
+		 
+		 if (location.country) {
+		  text += location.country;
+		 }
+		 
+		 return text;
+	}
 }]);
 
 cwController.controller('searchAlbumController', ['$scope','$http', function($scope, $http) {
 	$scope.submitAlbum = function() {
-		$http({method: 'POST', url:'/newalbum', data : $scope.index}).success(function(data, status) {
+		$http({method: 'POST', url:'/newalbum', data : { index : $scope.index }, dataType: 'json'})
+		.success(function(data, status) {
+			$scope.result = data.added;
+			$('#resultText').show();
+			$('#resultText').fadeOut(1500);
 		});
 	}
 
@@ -50,8 +89,8 @@ cwController.directive('autocomplete', function() {
 					scope.image = ui.item.icon;
 					scope.albumName = ui.item.value;
 					scope.artistName = ui.item.artist;
+					$('.ui-autocomplete-loading').removeClass("ui-autocomplete-loading");
 					scope.$apply();
-					$('#albumSelection').show();
 				}
 			}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
 			return $( "<li>" )
