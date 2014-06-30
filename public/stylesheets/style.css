@@ -4,8 +4,22 @@
 body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
-  font-size: large;
   overflow: hidden;
+}
+::-webkit-input-placeholder { 
+  font-family: 'Open Sans', sans-serif;
+ }
+::-moz-placeholder {   
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400; 
+  } /* firefox 19+ */
+:-ms-input-placeholder {   
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  } /* ie */
+input:-moz-placeholder {   
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400; 
 }
 .content {
   margin-top: 15.5em;
