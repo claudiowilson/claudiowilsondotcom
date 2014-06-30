@@ -11,10 +11,6 @@ cwController.controller('albumController', ['$scope','AlbumService', '$http', '$
 	$scope.albums = factory;
 
 	$scope.showAlbum = function(image, artist, album, location, id) {
-		$scope.image = image.replace('100x100', '600x600');
-		$scope.artistName = artist;
-		$scope.albumName = album;
-		$scope.location = getLocationText(location);
 		$http({method: 'GET', url: '/getsongs/' + id})
 		.success(function(data, status) {
 			$scope.songs = data.map(function(item) {
@@ -22,6 +18,10 @@ cwController.controller('albumController', ['$scope','AlbumService', '$http', '$
 				return item;
 			});
 		});
+		$scope.artistName = artist;
+		$scope.albumName = album;
+		$scope.location = getLocationText(location);
+		$scope.image = image.replace('100x100', '600x600');
 	}
 
 	$scope.hideAlbum = function() {
@@ -65,11 +65,13 @@ cwController.controller('blogIndexController', ['$scope', '$http', function($sco
 	});
 }]);
 
-cwController.controller('blogController', ['$scope', '$http', '$ce', '$routeParams', function($scope, $http, $sce, $routeParams) {
+cwController.controller('blogController', ['$scope', '$http', '$sce', '$routeParams', function($scope, $http, $sce, $routeParams) {
 	$http({method: 'GET', url:'/blog/' + $routeParams.blogurl})
 	.success(function(data, status) {
-		console.log(data);
-	})
+		$scope.post = $sce.trustAsHtml(JSON.parse(data));
+		//$scope.post = data;
+		//console.log(data);
+	});
 }]);
 
 cwController.directive('autocomplete', function() {
