@@ -17,11 +17,11 @@ cwController.controller('albumController', ['$scope','AlbumService', '$http', '$
 				item["preview"] = $sce.trustAsResourceUrl(item["preview"]);
 				return item;
 			});
+			$scope.artistName = artist;
+			$scope.albumName = album;
+			$scope.location = getLocationText(location);
+			$scope.image = image.replace('100x100', '600x600');
 		});
-		$scope.artistName = artist;
-		$scope.albumName = album;
-		$scope.location = getLocationText(location);
-		$scope.image = image.replace('100x100', '600x600');
 	}
 
 	$scope.hideAlbum = function() {
@@ -69,8 +69,6 @@ cwController.controller('blogController', ['$scope', '$http', '$sce', '$routePar
 	$http({method: 'GET', url:'/blog/' + $routeParams.blogurl})
 	.success(function(data, status) {
 		$scope.post = $sce.trustAsHtml(JSON.parse(data));
-		//$scope.post = data;
-		//console.log(data);
 	});
 }]);
 

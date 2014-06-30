@@ -7,8 +7,9 @@ var express = require('express'),
 	geoip = require('geoip-lite');
 
 var app = express();
+
 app.use(stylus.middleware({
-	src: __dirname + '/views',
+	src: __dirname,
 	dest: __dirname + '/public'
 }));
 
