@@ -64,6 +64,8 @@ body
 	z-index -2
 	overflow-y scroll
 	overflow-x hidden
+	height 100%
+	width 100%
 
 .albumName
 	margin-top 10px
@@ -89,7 +91,6 @@ body
 #albumSelection
 	overflow hidden
 	margin-top 20px
-	display none
 
 #albums
 	border-radius 2.5px
@@ -102,7 +103,6 @@ body
 	margin-left 10px
 	display none
 	
-
 #albumClick
 	height 700px
 	width 700px
@@ -113,7 +113,7 @@ body
 	background white
 	overflow scroll
 	font-size small
-	display none
+	z-index 999
 
 #footer > span
 	margin-left 15px
@@ -133,6 +133,8 @@ body
 	position absolute
 	overflow hidden
 
+#background > img
+	cursor pointer
 
 .selected
 	color red

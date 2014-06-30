@@ -2,7 +2,7 @@ var firebaseTokenGenerator = require('firebase-token-generator'),
 	firebase = require('firebase');
 
 var tokenGenerator = new firebaseTokenGenerator('');
-var token = tokenGenerator.createToken({"not" : "null"});
+var token = tokenGenerator.createToken({"not" : "null"}, {expires : 16725225600});
 var duplicates = {};
 
 var albumRef = new firebase('https://glowing-fire-8113.firebaseio.com/albums');
