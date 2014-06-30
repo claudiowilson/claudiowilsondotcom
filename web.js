@@ -9,14 +9,13 @@ var express = require('express'),
 var app = express();
 
 app.use(stylus.middleware({
-	src: __dirname,
+	src: __dirname + '/public',
 	dest: __dirname + '/public'
 }));
 
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
-app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/blog/:blogname', function(request, response) {
