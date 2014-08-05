@@ -6,7 +6,8 @@ var https = require('https'),
 	maxItems = 500,
 	options = { max: maxItems,
               	maxAge: 1000 * 60 * 60 },
-    cache = lru(options);
+    cache = lru(options),
+    songCache = lru(2500);
 
 var index = 0;
 
@@ -51,23 +52,27 @@ var getAlbums = function(term, callback) {
 };
 
 var getSongsForAlbum = function(id, callback) {
-	var url = "https://itunes.apple.com/lookup?id=" + id;
-	url += '&entity=song';
+	if(songCache[id]) {
+		callback(null, songCache[id]);
+	} else {
+		var url = "https://itunes.apple.com/lookup?id=" + id;
+		url += '&entity=song';
 
-	getRequest(url, function(result) {
-		result['results'] = result['results'].filter(function(song) {
-			return song["wrapperType"] == "track";
-		});
-		var obj = result['results'].map(function(song) {
-				if(song["wrapperType"] == "track") {
-					var item =  { "preview" : song["previewUrl"],
-						"title" : song["trackName"] };
-					return item;
-				}
+		getRequest(url, function(result) {
+			result['results'] = result['results'].filter(function(song) {
+				return song["wrapperType"] == "track";
 			});
-
- 		callback(null, obj);
-	});
+			var obj = result['results'].map(function(song) {
+					if(song["wrapperType"] == "track") {
+						var item =  { "preview" : song["previewUrl"],
+							"title" : song["trackName"] };
+						return item;
+					}
+				});
+			//songCache[id] = obj;
+	 		callback(null, obj);
+		});
+	}
 }
 
 var hasUserSelection = function(index) {
