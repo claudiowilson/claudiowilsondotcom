@@ -69,7 +69,7 @@ var getSongsForAlbum = function(id, callback) {
 						return item;
 					}
 				});
-			//songCache[id] = obj;
+			songCache[id] = obj;
 	 		callback(null, obj);
 		});
 	}
