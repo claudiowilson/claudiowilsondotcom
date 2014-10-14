@@ -5,27 +5,26 @@ I know I haven't posted in a long long time, so in an attempt to fix that, I'm g
 Here we go, in no specific order:
 
 ### Nicolas Jaar - And I Say (Xinobi Edit)
-[![Nicolas Jaar - And I Say (Xinobi Edit)](http://img.youtube.com/vi/AV_fcL_sj3Y/0.jpg)](http://www.youtube.com/watch?v=AV_fcL_sj3Y)
-
+<iframe width="420" height="315" src="http://www.youtube.com/embed/AV_fcL_sj3Y" frameborder="0" allowfullscreen></iframe>
 There's just something incredibly groovy, textural, and visceral about this track. The drums, the vocals and the vibe just blend into something incredibly unique.
 
 ### Daft Punk - Veridis Quo
-[![Daft Punk - Veridis Quo](http://img.youtube.com/vi/OgcY6qlzdf8/0.jpg)](http://www.youtube.com/watch?v=OgcY6qlzdf8)
+<iframe width="420" height="315" src="http://www.youtube.com/embed/OgcY6qlzdf8" frameborder="0" allowfullscreen></iframe>
 
 My favorite Daft Punk song of all time. This song is a masterpiece in my eyes. The progression is amazing. Discovery also has to be one of my favorite albums out there.
 
 ### Radiohead - Nude
-[![Radiohead - Nude](http://img.youtube.com/vi/1ky1td3_6LY/0.jpg)](http://www.youtube.com/watch?v=1ky1td3_6LY)
+<iframe width="420" height="315" src="http://www.youtube.com/embed/1ky1td3_6LY" frameborder="0" allowfullscreen></iframe>
 
 This track sends shivers down my spine every time I listen to it. Thom Yorke's vocals combined with Nigel Godrich's slow, eerie production makes for a thought provoking, melancholic track. My favorite Radiohead song.
 
 ### Arcade Fire - Rebellion (Lies)
-[![Arcade Fire - Rebellion (Lies)](http://img.youtube.com/vi/CICIfCbw1nU/0.jpg)](http://www.youtube.com/watch?v=CICIfCbw1nU)
+<iframe width="420" height="315" src="http://www.youtube.com/embed/CICIfCbw1nU" frameborder="0" allowfullscreen></iframe>
 
 The song builds up to an incredible crescendo, all around fantastic song.
 
 ### Giraffage - Music Sounds Better With You
-[![Giraffage - Music Sounds Better With You](http://img.youtube.com/vi/t2_sZPAStI4/0.jpg)](http://www.youtube.com/watch?v=t2_sZPAStI4)
+<iframe width="420" height="315" src="http://www.youtube.com/embed/t2_sZPAStI4" frameborder="0" allowfullscreen></iframe>
 
 I really have to give credit for this song to Thomas Bangalatar and Stardust because they made the first version of it, but I really love the spin Giraffage takes on a timeless classic. I've listened to this track way too much.
 
