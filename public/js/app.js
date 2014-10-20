@@ -19,5 +19,8 @@ claudiowilsondotcom.config(['$routeProvider', function($routeProvider) {
 		when('/blog/:blogurl', {
 			templateUrl: '/partials/blog.html',
 			controller: 'blogController'
+		})
+		.when('/projects', {
+			templateUrl: '/partials/projects.html'
 		});
 }]);
