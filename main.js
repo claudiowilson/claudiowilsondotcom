@@ -43,14 +43,17 @@ var AlbumList = React.createClass({
             );
         }.bind(this));
         var albumPop = this.state.showAlbum ? <AlbumPop key={this.state.albums[currKey].selectedAlbum}
+                                                albumId={this.state.albums[currKey].id}
                                                 image={this.state.albums[currKey].image}
                                                 artist={this.state.albums[currKey].artist}
                                                 location={this.state.albums[currKey].location}
                                                 album={this.state.albums[currKey].album}
                                                 onCloseClick={this.handleCloseClick} /> : null;
         return (
-            <div className="albums">
-                {albums}
+            <div>
+                <div className="albums">
+                    {albums}
+                </div>
                 {albumPop}
             </div>
         );
@@ -89,7 +92,36 @@ var AlbumPop = React.createClass({
          
          return text;
     },
+    getInitialState: function() {
+        return {songs:[]}
+    },
+    getSongs: function() {
+       $.ajax({
+           url: '/getsongs/' + this.props.albumId,
+           dataType: 'json',
+            type: 'GET',
+            success: function(data) {
+                this.setState({songs: data});
+            }.bind(this)
+        });
+    },
+    componentWillMount: function() {
+        this.getSongs();
+    },
+    componentWillUpdate: function() {
+        this.getSongs();
+    },
     render: function() {
+        var songs = this.state.songs.map(function(song, i) {
+            return (
+                <div key={i}>
+                    <p>{song.title}</p>
+                    <audio controls width="600px">
+                        <source src={song.preview} type="audio/mp4"/>
+                    </audio>
+                </div>
+            );
+        });
         return (
             <div id="albumClick">
                 <p onClick={this.props.onCloseClick}>Close</p>
@@ -98,12 +130,15 @@ var AlbumPop = React.createClass({
                 <p className="artistName"> {this.props.artist} </p>
                 <p id="location">{this.getLocationText(this.props.location)}</p>
                 <hr/>
+                <div id="songs">
+                    <p style={{"fontSize": "large"}}>Tracks</p>
+                    {songs}
+                </div>
             </div>
+
         );
     }
 });
-
-var loader = new AlbumLazyLoader(window.innerHeight, window.innerWidth);
 
 ReactDOM.render(
     <AlbumList />, 
