@@ -147,11 +147,11 @@ input:-moz-placeholder {
   position: absolute;
   overflow: hidden;
 }
-#background > img {
+.albums > img {
   cursor: pointer;
   border: 2px solid transparent;
 }
-#background > img:hover {
+.albums > img:hover {
   border-color: #000;
 }
 .selected {

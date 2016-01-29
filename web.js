@@ -1,5 +1,4 @@
 var express = require('express'),
-	stylus = require('stylus'),
 	searcher = require('./musicSearch'),
 	albumDb = require('./albumDb'),
 	posts = require('./postParser'),
@@ -7,11 +6,6 @@ var express = require('express'),
 	geoip = require('geoip-lite');
 
 var app = express();
-
-app.use(stylus.middleware({
-	src: __dirname + '/public',
-	dest: __dirname + '/public'
-}));
 
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
