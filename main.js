@@ -6,6 +6,8 @@ var AlbumList = require('./public/js/albumList.js');
 var Index = require('./public/js/index.js');
 var Contact = require('./public/js/contact.js');
 var Projects = require('./public/js/projects.js');
+var BlogIndex = require('./public/js/blog.js').Index;
+var Blog = require('./public/js/blog.js').Blog;
 var Router = require('react-router').Router;
 var Route = require('react-router').Route;
 var Link = require('react-router').Link;
@@ -29,7 +31,7 @@ var App = React.createClass({
                     <div className="container">
                         <ul>
                             <li><Link to="/index">About</Link></li>
-                            <li><a href="#/blog/index">Blog</a></li>
+                            <li><Link to="/blogs">Blog</Link></li>
                             <li><Link to="/projects">Projects</Link></li>
                             <li><Link to="/contact">Contact</Link></li>
                             <li> <a href="http://www.github.com/claudiowilson" target="_blank">Github</a></li>
@@ -47,6 +49,9 @@ ReactDOM.render(
     <Router>
         <Route path="/" component={App}>
             <Route path="index" component={Index} />
+            <Route path="blogs" component={BlogIndex}>
+                <Route path=":blogUrl" component={Blog} />
+            </Route>
             <Route path="contact" component={Contact} />
             <Route path="projects" component={Projects} />
         </Route>

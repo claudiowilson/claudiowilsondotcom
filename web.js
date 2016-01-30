@@ -13,16 +13,15 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
 app.get('/blog/:blogname', function(request, response) {
-	if (request.params.blogname == 'index') {
-		posts.getPosts(function(err, data) {
-			response.json(200, data);
-		});
-	} else {
-		posts.getHtmlFromMd(request.params.blogname, function(err, html) {
-			response.json(200, html);
-		});
-	}
-	
+    posts.getHtmlFromMd(request.params.blogname, function(err, html) {
+        response.json(200, html);
+    });
+});
+
+app.get('/blogs', function(request, response) {
+    posts.getPosts(function(err, data) {
+        response.json(200, data);
+    });
 });
 
 app.get('/search/:name', function(request, response) {

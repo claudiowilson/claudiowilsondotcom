@@ -93,9 +93,9 @@ var AlbumPop = React.createClass({
     getInitialState: function() {
         return {songs:[]}
     },
-    getSongs: function() {
+    getSongs: function(albumId) {
        $.ajax({
-            url: '/getsongs/' + this.props.albumId,
+            url: '/getsongs/' + albumId,
             dataType: 'json',
             type: 'GET',
             success: function(data) {
@@ -104,10 +104,10 @@ var AlbumPop = React.createClass({
         });
     },
     componentWillMount: function() {
-        this.getSongs();
+        this.getSongs(this.props.albumId);
     },
-    componentWillUpdate: function() {
-        this.getSongs();
+    componentWillReceiveProps: function(nextProps) {
+        this.getSongs(nextProps.albumId);
     },
     render: function() {
         var songs = this.state.songs.map(function(song, i) {
