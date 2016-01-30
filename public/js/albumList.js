@@ -1,7 +1,6 @@
 'use strict';
 
 var React = require('react');
-var ReactDOM = require('react-dom');
 var LazyLoad = require('./../bower_components/vanilla-lazyload/dist/lazyload.min.js');
 
 var AlbumList = React.createClass({
@@ -96,8 +95,8 @@ var AlbumPop = React.createClass({
     },
     getSongs: function() {
        $.ajax({
-           url: '/getsongs/' + this.props.albumId,
-           dataType: 'json',
+            url: '/getsongs/' + this.props.albumId,
+            dataType: 'json',
             type: 'GET',
             success: function(data) {
                 this.setState({songs: data});

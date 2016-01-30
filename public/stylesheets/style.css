@@ -154,6 +154,10 @@ input:-moz-placeholder {
 .albums > img:hover {
   border-color: #000;
 }
+#albumInput {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
 .selected {
   color: #f00;
 }
