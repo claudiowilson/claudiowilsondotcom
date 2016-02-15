@@ -120,7 +120,7 @@ input:-moz-placeholder {
 #albumClick {
   height: 700px;
   width: 700px;
-  position: absolute;
+  position: fixed;
   top: 10%;
   left: 25%;
   border: 2px solid #000;
@@ -147,12 +147,16 @@ input:-moz-placeholder {
   position: absolute;
   overflow: hidden;
 }
-#background > img {
+.albums > img {
   cursor: pointer;
   border: 2px solid transparent;
 }
-#background > img:hover {
+.albums > img:hover {
   border-color: #000;
+}
+#albumInput {
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 .selected {
   color: #f00;

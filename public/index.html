@@ -4,54 +4,13 @@
 	<title>claudio</title>
 	<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-	<script src="/bower_components/angular/angular.min.js"></script>
-	<script src="/bower_components/angular-route/angular-route.min.js"></script>
 	<script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
-	<script src="//cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
-	<script src="/js/app.js"></script>
-	<script src="/js/controllers.js"></script>
 	<link rel="stylesheet" href="/stylesheets/style.css">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 </head>
 <body>
-<div ng-controller="albumController">
-	<div id="background">
-			<img ng-repeat="album in albums" height="100" width="100" ng-click="showAlbum(album.image, album.artist, album.album, album.location, album.id)" ng-attr-src="{{album.image}}">
-	</div>
-	<div id="sidebar">
-	  <div id="header">
-	    <h4>
-	      <div class="container"><a href="/">CLAUDIO <br/>WILSON</a></div>
-	    </h4>
-	  </div>
-	  	<div class="container">
-		  <ul>
-		    <li><a href="#/index">About</a></li>
-		    <li><a href="#/blog/index">Blog</a></li>
-		    <li><a href="#/projects">Projects</a></li>
-		    <li><a href="#/contact">Contact</a></li>
-		    <li> <a href="http://www.github.com/claudiowilson" target="_blank">Github</a></li>
-		    <li> <a href="http://www.twitter.com/claudiyoh" target="_blank">Twitter</a></li>
-		  </ul>
-		</div>
-	</div>
-	<div id="albumClick" ng-show="image">
-		<p ng-click="hideAlbum()" style="font-weight:bold">Close</p>
-		<img ng-src="{{image}}" id="album600">
-		<p class="albumName"> {{albumName}} </p>
-		<p class="artistName"> {{artistName}} </p>
-		<p id="location">{{location}}</p>
-		<hr>
-		<div id="songs">
-			<p style="font-size:large">Tracks</p>
-			<div ng-repeat="song in songs">
-				<p>{{song.title}}</p>
-				<audio controls width=600px>
-					<source ng-src="{{song.preview}}" type="audio/mp4"/>
-				</audio>
-			</div>
-		</div>
-	</div>
-</div>
-	<div ng-view></div>
+    <div id="app">
+    </div>
+    <script src="/js/bundle.js"></script>
 </body>
+</html>

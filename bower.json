@@ -17,7 +17,6 @@
     "tests"
   ],
   "dependencies": {
-    "angular" : "~1.2.x",
-    "angular-route" : "~1.2.x"
+    "vanilla-lazyload" : "1.5.7" 
   }
 }
